@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+
 @interface GameplayScene : SKScene
 
 //Method used to pass valid trampoline information from

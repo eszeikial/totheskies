@@ -8,10 +8,13 @@
 
 #import "GameplayScene.h"
 #import <SpriteKit/SpriteKit.h>
+#import "Player.h"
+#import "Pickup.h"
 
 
 @implementation GameplayScene{
-    SKSpriteNode *player;
+    //SKSpriteNode *player;
+    Player *_player;
     SKPhysicsBody *playerBody;
     
     //Trampoline - drawing
@@ -40,15 +43,22 @@
     
     //--------------Player----------------//
     
-    //Setting up player
-    player = [[SKSpriteNode alloc]initWithColor:[SKColor colorWithRed:.6 green:.1 blue:.1 alpha:1.0]
-        size:CGSizeMake(20, 20)];
-    player.name = @"player";
+    _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
     
-    //players physics
-    playerBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(20, 20)];
-    player.physicsBody = playerBody;
-    player.position = CGPointMake(self.view.center.x, 800);
+    //Setting up player #TO DELETE
+//    player = [[SKSpriteNode alloc]initWithColor:[SKColor colorWithRed:.6 green:.1 blue:.1 alpha:1.0]
+//        size:CGSizeMake(20, 20)];
+//    player.name = @"player";
+//    
+//    //players physics
+//    playerBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(20, 20)];
+//    player.physicsBody = playerBody;
+//    player.position = CGPointMake(self.view.center.x, 800);
+    
+    // ----------- DEBUG -- PICKUPS --------//
+    
+    Pickup *myPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(self.view.center.x + 100, 800)];
+    [self addChild:myPickup]; 
     
     
     //-------------trampoline-------------//
@@ -66,7 +76,7 @@
     
     
     [self addChild:trampoline];
-    [self addChild:player];
+    [self addChild:_player];
 }
 
 
