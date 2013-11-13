@@ -7,8 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GameObject.h"
 
-@interface Player : SKSpriteNode
+
+
+@interface Player : GameObject
 
 - (id)initWithStartPoint: (CGPoint) point;
 

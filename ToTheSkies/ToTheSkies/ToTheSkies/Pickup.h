@@ -1,5 +1,5 @@
 //
-//  Pickup.h
+//  Pickup.h  // Extends GameObject
 //  ToTheSkies
 //
 //  Created by Student on 11/12/13.
@@ -7,8 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GameObject.h"
 
-@interface Pickup : SKSpriteNode
+@interface Pickup : GameObject
 
 - (id)initWithStartPoint: (CGPoint) point;
 

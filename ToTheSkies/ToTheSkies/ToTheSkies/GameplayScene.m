@@ -38,22 +38,12 @@
     _height = self.size.height;
     _width = self.size.width;
     _trampExists = false;
-    self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.6 alpha:1.0];
+    self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
     
     
     //--------------Player----------------//
     
     _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
-    
-    //Setting up player #TO DELETE
-//    player = [[SKSpriteNode alloc]initWithColor:[SKColor colorWithRed:.6 green:.1 blue:.1 alpha:1.0]
-//        size:CGSizeMake(20, 20)];
-//    player.name = @"player";
-//    
-//    //players physics
-//    playerBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(20, 20)];
-//    player.physicsBody = playerBody;
-//    player.position = CGPointMake(self.view.center.x, 800);
     
     // ----------- DEBUG -- PICKUPS --------//
     

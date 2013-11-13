@@ -8,24 +8,21 @@
 
 #import "Player.h"
 
-@implementation Player{
-    SKPhysicsBody *_spriteBody;
-}
+// constants
+static const float kImageScaleFactor = 0.5;
+static NSString *const kImageFileName = @"character.png";
 
+
+
+@implementation Player
 
 - (id)initWithStartPoint: (CGPoint) point{
-    
-    //self = [super init];
-    self = [super initWithColor:[SKColor colorWithRed:.6 green:.1 blue:.1 alpha:1.0] size:CGSizeMake(20, 20)];
+
+    self = [super initWithImageNamed:kImageFileName andScaleFactor:kImageScaleFactor];
     
     if (self) {
-        _spriteBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(20, 20)];
-        
-        self.physicsBody = _spriteBody; // point property to reference
-        
         self.name = @"player";
         self.position = point;
-        // initialize instance variables here
     }
     return self;
 }
