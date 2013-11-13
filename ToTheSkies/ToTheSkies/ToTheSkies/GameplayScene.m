@@ -35,6 +35,7 @@
 -(void) didMoveToView:(SKView *)view
 {
     //-------------Misc Setup-------------//
+    [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
     _height = self.size.height;
     _width = self.size.width;
     _trampExists = false;

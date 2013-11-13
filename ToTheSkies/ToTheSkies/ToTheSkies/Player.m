@@ -22,6 +22,7 @@ static NSString *const kImageFileName = @"character.png";
     
     if (self) {
         self.name = @"player";
+        self.physicsBody.categoryBitMask = ColliderTypePlayer;
         self.position = point;
     }
     return self;

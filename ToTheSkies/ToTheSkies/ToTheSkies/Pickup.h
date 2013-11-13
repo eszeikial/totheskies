@@ -9,7 +9,16 @@
 #import <SpriteKit/SpriteKit.h>
 #import "GameObject.h"
 
+typedef enum {
+    PickupTypeBalloon = 1,
+    PickupTypeFuel = 2,
+    PickupTypeRing = 3
+} PickupType;
+
 @interface Pickup : GameObject
+
+
+@property (nonatomic, assign) PickupType type;
 
 - (id)initWithStartPoint: (CGPoint) point;
 
