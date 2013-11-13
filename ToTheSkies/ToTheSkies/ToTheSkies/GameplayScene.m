@@ -19,7 +19,6 @@
 @implementation GameplayScene{
     //SKSpriteNode *player;
     Player *_player;
-    SKPhysicsBody *_playerBody;
     
     //JetPack stuff
     CMMotionManager *_motionManager;
@@ -105,7 +104,8 @@
         {
             NSLog(@"Collision with tramp should occur");
             //Getting values from player.
-            CGVector velocity = [_player getVelocity];
+            //CGVector velocity = [_player getVelocity];
+            CGVector velocity =_player.physicsBody.velocity; // #ZACH | There's a reason I made the player/GameObject inherit from SKSpriteNode :P
             float vx = velocity.dx;
             float vy = velocity.dy;
             

@@ -28,10 +28,10 @@ static NSString *const kImageFileName = @"character.png";
     return self;
 }
 
--(CGVector)getVelocity
+/*-(CGVector)getVelocity  Don't need this, unless you really want it #ZACH
 {
     return self.physicsBody.velocity;
-}
+} */
 
 -(void)setVelocityX:(float)x yVector:(float)y
 {

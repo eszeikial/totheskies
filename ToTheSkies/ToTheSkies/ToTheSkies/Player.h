@@ -14,7 +14,7 @@
 @interface Player : GameObject
 
 - (id)initWithStartPoint: (CGPoint) point;
--(CGVector)getVelocity;
+//-(CGVector)getVelocity;
 -(void)setVelocityX:(float)x yVector:(float)y;
 
 
