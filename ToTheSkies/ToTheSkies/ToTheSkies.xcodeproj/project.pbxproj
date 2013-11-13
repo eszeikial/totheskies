@@ -23,6 +23,7 @@
 		3F1953E51832AFC800BB093C /* ToTheSkiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1953E41832AFC800BB093C /* ToTheSkiesTests.m */; };
 		3F1953EF1832AFF000BB093C /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1953EE1832AFF000BB093C /* SpriteKit.framework */; };
 		3F1953F21832B11B00BB093C /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1953F11832B11B00BB093C /* GameplayScene.m */; };
+		3F289581183430EF00B59F0B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F289580183430EF00B59F0B /* CoreMotion.framework */; };
 		3F38557E1833E0F9005E550D /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F38557C1833E0F9005E550D /* character.png */; };
 		3F38557F1833E0F9005E550D /* redballoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F38557D1833E0F9005E550D /* redballoon.png */; };
 		3F3855821833E6F4005E550D /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3855811833E6F4005E550D /* GameObject.m */; };
@@ -63,6 +64,7 @@
 		3F1953EE1832AFF000BB093C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		3F1953F01832B11B00BB093C /* GameplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayScene.h; sourceTree = "<group>"; };
 		3F1953F11832B11B00BB093C /* GameplayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameplayScene.m; sourceTree = "<group>"; };
+		3F289580183430EF00B59F0B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3F38557C1833E0F9005E550D /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 		3F38557D1833E0F9005E550D /* redballoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redballoon.png; sourceTree = "<group>"; };
 		3F3855801833E6F4005E550D /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F289581183430EF00B59F0B /* CoreMotion.framework in Frameworks */,
 				3F1953EF1832AFF000BB093C /* SpriteKit.framework in Frameworks */,
 				3F1953BC1832AFC800BB093C /* CoreGraphics.framework in Frameworks */,
 				3F1953BE1832AFC800BB093C /* UIKit.framework in Frameworks */,
@@ -120,6 +123,7 @@
 		3F1953B81832AFC800BB093C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F289580183430EF00B59F0B /* CoreMotion.framework */,
 				3F1953EE1832AFF000BB093C /* SpriteKit.framework */,
 				3F1953B91832AFC800BB093C /* Foundation.framework */,
 				3F1953BB1832AFC800BB093C /* CoreGraphics.framework */,

@@ -28,4 +28,15 @@ static NSString *const kImageFileName = @"character.png";
     return self;
 }
 
+-(CGVector)getVelocity
+{
+    return self.physicsBody.velocity;
+}
+
+-(void)setVelocityX:(float)x yVector:(float)y
+{
+    CGVector vec = CGVectorMake(x,y);
+    self.physicsBody.velocity = vec;
+}
+
 @end

@@ -232,7 +232,6 @@
 -(void)trampCollide:(float)wSlope wallSize:(float)wSize distFromCenter:(float)distCenter
 {
     [sb playJumpSound];
-    
     //250 is the max distance from the wall. (because of max wall size.)
     //Sorry about the magic numbahs!
     float _velocityMod = ((250-distCenter)/150);

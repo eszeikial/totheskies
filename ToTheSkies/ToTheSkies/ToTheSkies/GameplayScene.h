@@ -10,9 +10,5 @@
 
 @interface GameplayScene : SKScene
 
-//Method used to pass valid trampoline information from
-//the viewcontroller to the gameplay scene.
-
-//-(void)getTrampolinePath:(CGPathRef)path;  //#ZACH | you going to need this? Just commented out to remove the error. Sorry.
 
 @end
