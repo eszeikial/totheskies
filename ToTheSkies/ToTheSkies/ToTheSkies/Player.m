@@ -35,11 +35,8 @@ static NSString *const kImageFileName = @"character.png";
     
     switch (collideCategory) {
         case ColliderTypeObstacle:
-            NSLog(@"Obstacle");
             break;
         case ColliderTypePickup:
-            NSLog(@"Pickup");
-            NSLog(@"%@", collisionObject.scene.children.debugDescription);
             [collisionObject removeFromParent];
             [self addPoints:((Pickup*) collisionObject).points];
             break;
@@ -50,13 +47,8 @@ static NSString *const kImageFileName = @"character.png";
 }
 
 - (void)addPoints: (int)points{
-    NSLog(@"Added %d points!", points);
+    //NSLog(@"Added %d points!", points);
 }
-
-/*-(CGVector)getVelocity  Don't need this, unless you really want it #ZACH
-{
-    return self.physicsBody.velocity;
-} */
 
 -(void)setVelocityX:(float)x yVector:(float)y
 {

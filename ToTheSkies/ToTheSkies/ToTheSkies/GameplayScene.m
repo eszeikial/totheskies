@@ -18,17 +18,25 @@
 
 
 @implementation GameplayScene{
-    //SKSpriteNode *player;
+
+    // scene layers
+    SKNode *_gameplayLayer;
+    SKNode *_backgroundLayer;
+    
+    // clouds
+    int _cloudsOnScreen;
+    NSTimeInterval _timeSinceLastCloudSpawn;
+    NSDate *_timeLastCloudSpawn;
+    
+    // player
     Player *_player;
     
     //JetPack stuff
     CMMotionManager *_motionManager;
     
     //Pickups
-    NSMutableArray *_pickupArray;
-    NSMutableArray *_forRemoval;
-    NSTimeInterval _timeSinceLastSpawn;
-    NSDate *_timeLastSpawn;
+    NSTimeInterval _timeSinceLastPickupSpawn;
+    NSDate *_timeLastPickupSpawn;
     
     // Sound Buddy
     SoundBuddy* soundBuddy;
@@ -52,9 +60,20 @@
 //Method is called when the scene is presented by a view.
 -(void) didMoveToView:(SKView *)view
 {
+    
+    // -------------- layers --------------- //
+    _gameplayLayer = [[SKNode alloc]init];
+    _backgroundLayer = [[SKNode alloc]init];
+    
+    _gameplayLayer.zPosition = 0;
+    _gameplayLayer.zPosition = 1;
+    
     //-------------Misc Setup-------------//
     
+
+    
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
+    
     self.physicsWorld.contactDelegate = self;
     _height = self.size.height;
     _width = self.size.width;
@@ -62,6 +81,8 @@
     _trampolineCollideTimer = 5;
     _trampolineStrength = 1.4;
     self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
+    [self addChild:_gameplayLayer];
+    [self addChild:_backgroundLayer];
     
     
     //--------------Sound Buddy-----------//
@@ -77,13 +98,8 @@
     
     // --------- PICKUPS --------//
     
-    //Pickup *myPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(self.view.center.x + 100, 800)];
-    //myPickup.name = @"balloon";
-    //[self addChild:myPickup];
-    _forRemoval = [NSMutableArray array];
-    _pickupArray = [NSMutableArray arrayWithCapacity:kPickupsOnScreenLimit];
-    _timeLastSpawn = [NSDate date];
-    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
+    _timeLastPickupSpawn = [NSDate date];
+    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
     
     //-------------trampoline-------------//
     
@@ -104,42 +120,43 @@
     
     
     
-    [self addChild:_trampoline];
-    [self addChild:_player];
+    // ------------- clouds ------------ //
+    _timeLastCloudSpawn = [NSDate date];
+    _timeSinceLastCloudSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
+    
+    
+    
+    [_gameplayLayer addChild:_trampoline];
+    [_gameplayLayer addChild:_player];
 }
 
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
 // UPDATE 0
 - (void)update:(NSTimeInterval)currentTime{
     
+    // --------- CLOUD UPDATE ----------
+    [self scrollBackground];
+    
+    
     //----------- PICKUP REMOVAL ---------
-    for (Pickup *p in _pickupArray){
-        if (p.position.x < 0 || p.position.x > self.size.width || p.position.y < 0 || p.position.y > self.size.height){
-            [_forRemoval addObject:p];
-            NSLog(@"Pickup removed!"); 
+    
+    [_gameplayLayer enumerateChildNodesWithName:@"pickup" usingBlock: ^(SKNode *node, BOOL *stop) {
+        if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
+            [node removeFromParent]; // remove pickup from scene
         }
-    }
-    
-    for (Pickup *p in _forRemoval){
-        [_pickupArray removeObject:p];
-    }
-    
-    [_forRemoval removeAllObjects];
+        else{
+            [node.physicsBody applyForce:CGVectorMake(0, 5.0)]; // make it float! #DEBUG (this might be memory intensive)
+        }
+    }];
     
     // ---------- PICKUP SPAWN -------------
-    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
+    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]); // update variable storing how long it's been since last pickup spawned
     
-    if (_pickupArray.count < kPickupsOnScreenLimit && _timeSinceLastSpawn > 2.0){
-        Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(arc4random()%700, kPickupsOnScreenLimit * 200)];
-        _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
-        [_pickupArray addObject:tempPickup];
-        [self addChild:tempPickup];
-        NSLog(@"added pickup");
-    }
-    
-    
-    //NSLog(@"%.2f", _timeSinceLastSpawn);
-    
+    if (_timeSinceLastPickupSpawn > kPickupSpawnDelay){ // if it's been a while, and there aren't too many pickups already on screen...
+        Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + 20)]; // spawn pickup
+        _timeLastPickupSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
+        [_gameplayLayer addChild:tempPickup]; // add pickup to scene
+    } // end if
     
 } // end update
 
@@ -259,7 +276,34 @@
     }
 }
 
-// ---------- DEBUG Helper for array ---------
+// ---------- Background ---------
+
+-(void)scrollBackground{
+    _timeSinceLastCloudSpawn = fabs([_timeLastCloudSpawn timeIntervalSinceNow]);
+    
+    if (_cloudsOnScreen < kMaxCloudsOnScreen && _timeSinceLastCloudSpawn > kCloudSpawnDelay){
+        SKSpriteNode *newCloud = [[SKSpriteNode alloc]initWithImageNamed:@"cloud.png"];
+        newCloud.position = CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + newCloud.size.height);
+        newCloud.name = @"cloud";
+        [_backgroundLayer addChild:newCloud];
+        _timeLastCloudSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
+        _cloudsOnScreen++;
+    }
+    
+    // remove off-screen clouds
+    [_backgroundLayer enumerateChildNodesWithName:@"cloud" usingBlock: ^(SKNode *node, BOOL *stop) {
+        if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
+            [node removeFromParent]; // remove pickup from scene
+            _cloudsOnScreen--;
+        }
+        else{
+            [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen clouds down
+        }
+    }];
+    
+    
+    
+}
 
 
 
@@ -271,12 +315,9 @@
     if (contact.bodyA.categoryBitMask == ColliderTypePlayer|| contact.bodyB.categoryBitMask == ColliderTypePlayer) { // if one of the bodies is the player
         if (contact.bodyA.categoryBitMask == ColliderTypePlayer){ // if it's bodyA
             [_player collide:(GameObject*)contact.bodyB.node withCategory:contact.bodyB.categoryBitMask]; //trigger collide with bodyB
-            [_pickupArray removeObject:contact.bodyB.node];
-            NSLog(@"Pickup count: %d", _pickupArray.count); 
         }
         else { // if it's bodyB
             [_player collide:(GameObject*)contact.bodyA.node withCategory:contact.bodyA.categoryBitMask]; // trigger collide wtih bodyA
-            [_pickupArray removeObject:contact.bodyA.node];
         }
     } // end if
     
@@ -287,8 +328,6 @@
         [soundBuddy playPopSound];
         
     }
-    
-    NSLog(@"Contact!");
     
 }
 
@@ -345,6 +384,12 @@
     _touch = nil;
 }
 
+
+// -------------------- HELPERS ---------------------
+
+-(int)randBetweenLowerBound: (int)lowerBound andUpperBound: (int)upperBound{
+    return lowerBound + arc4random() % (upperBound - lowerBound);
+}
 
 
 @end
