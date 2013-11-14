@@ -23,9 +23,26 @@ static NSString *const kImageFileName = @"character.png";
     if (self) {
         self.name = @"player";
         self.physicsBody.categoryBitMask = ColliderTypePlayer;
+        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypeTrampoline | ColliderTypeObstacle | ColliderTypePickup;
         self.position = point;
     }
     return self;
+}
+
+- (void)collide: (GameObject*) collisionObject withCategory:(uint8_t) collideCategory{
+    
+    switch (collideCategory) {
+        case ColliderTypeObstacle:
+            NSLog(@"Obstacle");
+            break;
+        case ColliderTypePickup:
+            NSLog(@"Pickup");
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 /*-(CGVector)getVelocity  Don't need this, unless you really want it #ZACH

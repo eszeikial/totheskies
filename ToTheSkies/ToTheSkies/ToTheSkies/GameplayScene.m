@@ -46,6 +46,7 @@
     //-------------Misc Setup-------------//
     
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
+    self.physicsWorld.contactDelegate = self;
     _height = self.size.height;
     _width = self.size.width;
     _trampExists = false;
@@ -133,7 +134,7 @@
     
     //Temporary debug stuff for Accelerometer.
     CMAccelerometerData *data = _motionManager.accelerometerData;
-    NSLog(@"Accelerometer x: %f, y: %f, z: %f", data.acceleration.x, data.acceleration.y, data.acceleration.z);
+    //NSLog(@"Accelerometer x: %f, y: %f, z: %f", data.acceleration.x, data.acceleration.y, data.acceleration.z);
     
     //Trampoline timer decrements towards 0 every frame.
     _trampolineCollideTimer--;
@@ -198,6 +199,24 @@
         return NO;
     }
 }
+
+// --------------- General Collision Stuff ------------- //
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+
+    if (contact.bodyA.categoryBitMask == ColliderTypePlayer|| contact.bodyB.categoryBitMask == ColliderTypePlayer) { // if one of the bodies is the player
+        if (contact.bodyA.categoryBitMask == ColliderTypePlayer){ // if it's bodyA
+            [_player collide:(GameObject*)contact.bodyB.node withCategory:contact.bodyB.categoryBitMask]; //trigger collide with bodyB
+        }
+        else { // if it's bodyB
+            [_player collide:(GameObject*)contact.bodyA.node withCategory:contact.bodyA.categoryBitMask]; // trigger collide wtih bodyA
+        }
+    } // end if
+    
+    NSLog(@"Contact!");
+    
+}
+
 
 
 

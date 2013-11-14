@@ -14,6 +14,7 @@
 @interface Player : GameObject
 
 - (id)initWithStartPoint: (CGPoint) point;
+- (void)collide: (GameObject*) collisionObject withCategory:(uint8_t) collideCategory;
 //-(CGVector)getVelocity;
 -(void)setVelocityX:(float)x yVector:(float)y;
 

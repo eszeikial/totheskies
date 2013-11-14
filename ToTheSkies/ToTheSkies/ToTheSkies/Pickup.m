@@ -21,6 +21,7 @@ static const float kImageScaleFactor = 0.5;
         self.type = PickupTypeBalloon;
         self.name = @"pickup";
         self.physicsBody.categoryBitMask = ColliderTypePickup;
+        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypePlayer; 
         self.physicsBody.affectedByGravity = NO; // DEBUG
         
         self.position = point;

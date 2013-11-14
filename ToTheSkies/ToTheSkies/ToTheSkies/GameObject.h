@@ -9,11 +9,11 @@
 #import <SpriteKit/SpriteKit.h>
 
 typedef enum : uint8_t {
-    ColliderTypePlayer = 1,
-    ColliderTypeWall = 2,
-    ColliderTypeTrampoline = 4,
-    ColliderTypePickup = 8,
-    ColliderTypeObstacle = 16
+    ColliderTypePlayer = 0x1 << 0,
+    ColliderTypeWall = 0x1 << 1,
+    ColliderTypeTrampoline = 0x1 << 2,
+    ColliderTypePickup = 0x1 << 3,
+    ColliderTypeObstacle = 0x1 << 4
 } ColliderType;
 
 
