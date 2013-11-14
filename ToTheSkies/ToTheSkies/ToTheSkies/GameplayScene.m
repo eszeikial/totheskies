@@ -24,6 +24,12 @@
     //JetPack stuff
     CMMotionManager *_motionManager;
     
+    //Pickups
+    NSMutableArray *_pickupArray;
+    NSMutableArray *_forRemoval;
+    NSTimeInterval _timeSinceLastSpawn;
+    NSDate *_timeLastSpawn;
+    
     // Sound Buddy
     SoundBuddy* soundBuddy;
     
@@ -69,12 +75,15 @@
     _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
     
     
-    // --------- DEBUG -- PICKUPS --------//
+    // --------- PICKUPS --------//
     
-    Pickup *myPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(self.view.center.x + 100, 800)];
-    myPickup.name = @"balloon";
-    [self addChild:myPickup]; 
-    
+    //Pickup *myPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(self.view.center.x + 100, 800)];
+    //myPickup.name = @"balloon";
+    //[self addChild:myPickup];
+    _forRemoval = [NSMutableArray array];
+    _pickupArray = [NSMutableArray arrayWithCapacity:kPickupsOnScreenLimit];
+    _timeLastSpawn = [NSDate date];
+    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
     
     //-------------trampoline-------------//
     
@@ -98,6 +107,42 @@
     [self addChild:_trampoline];
     [self addChild:_player];
 }
+
+// Performs any scene-specific updates that need to occur before scene actions are evaluated.
+// UPDATE 0
+- (void)update:(NSTimeInterval)currentTime{
+    
+    //----------- PICKUP REMOVAL ---------
+    for (Pickup *p in _pickupArray){
+        if (p.position.x < 0 || p.position.x > self.size.width || p.position.y < 0 || p.position.y > self.size.height){
+            [_forRemoval addObject:p];
+            NSLog(@"Pickup removed!"); 
+        }
+    }
+    
+    for (Pickup *p in _forRemoval){
+        [_pickupArray removeObject:p];
+    }
+    
+    [_forRemoval removeAllObjects];
+    
+    // ---------- PICKUP SPAWN -------------
+    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
+    
+    if (_pickupArray.count < kPickupsOnScreenLimit && _timeSinceLastSpawn > 2.0){
+        Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(arc4random()%700, kPickupsOnScreenLimit * 200)];
+        _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
+        [_pickupArray addObject:tempPickup];
+        [self addChild:tempPickup];
+        NSLog(@"added pickup");
+    }
+    
+    
+    //NSLog(@"%.2f", _timeSinceLastSpawn);
+    
+    
+} // end update
+
 
 
 //Preforms scene-specific updates after actions are evaluated.
@@ -145,7 +190,7 @@
     }
     
     //Temporary debug stuff for Accelerometer.
-    CMAccelerometerData *data = _motionManager.accelerometerData;
+    //CMAccelerometerData *data = _motionManager.accelerometerData;
     //NSLog(@"Accelerometer x: %f, y: %f, z: %f", data.acceleration.x, data.acceleration.y, data.acceleration.z);
     
     //Trampoline timer decrements towards 0 every frame.
@@ -162,6 +207,8 @@
 {
     [self screenWrap];
 }
+
+
 
 
 //Helper method to wrap screen if necessary.
@@ -212,6 +259,11 @@
     }
 }
 
+// ---------- DEBUG Helper for array ---------
+
+
+
+
 // --------------- General Collision Stuff ------------- //
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
@@ -219,9 +271,12 @@
     if (contact.bodyA.categoryBitMask == ColliderTypePlayer|| contact.bodyB.categoryBitMask == ColliderTypePlayer) { // if one of the bodies is the player
         if (contact.bodyA.categoryBitMask == ColliderTypePlayer){ // if it's bodyA
             [_player collide:(GameObject*)contact.bodyB.node withCategory:contact.bodyB.categoryBitMask]; //trigger collide with bodyB
+            [_pickupArray removeObject:contact.bodyB.node];
+            NSLog(@"Pickup count: %d", _pickupArray.count); 
         }
         else { // if it's bodyB
             [_player collide:(GameObject*)contact.bodyA.node withCategory:contact.bodyA.categoryBitMask]; // trigger collide wtih bodyA
+            [_pickupArray removeObject:contact.bodyA.node];
         }
     } // end if
     
@@ -230,6 +285,7 @@
     if([contact.bodyB.node.name  isEqual: @"balloon"] || [contact.bodyA.node.name  isEqual: @"balloon"])
     {
         [soundBuddy playPopSound];
+        
     }
     
     NSLog(@"Contact!");

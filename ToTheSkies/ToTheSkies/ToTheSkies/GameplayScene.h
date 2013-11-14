@@ -7,10 +7,16 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+
+static const int kPickupsOnScreenLimit = 5;
+
+@class Pickup;
 @class ViewController;
+
 
 @interface GameplayScene : SKScene <SKPhysicsContactDelegate>
 
 @property (nonatomic, weak)ViewController *viewController;
+
 
 @end

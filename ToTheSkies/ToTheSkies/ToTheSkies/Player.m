@@ -8,6 +8,7 @@
 
 #import "Player.h"
 #import "Pickup.h"
+#import "GameplayScene.h"
 
 // constants
 static const float kImageScaleFactor = 0.5;

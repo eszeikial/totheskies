@@ -7,6 +7,7 @@
 //
 
 #import "Pickup.h"
+#import "GameplayScene.h"
 
 static NSString *const kBalloonImage = @"redballoon.png";
 static const float kImageScaleFactor = 0.5;
@@ -24,7 +25,8 @@ static const int kBalloonPoints = 100;
         self.name = @"pickup";
         self.physicsBody.categoryBitMask = ColliderTypePickup;
         self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypePlayer; 
-        self.physicsBody.affectedByGravity = NO; // DEBUG
+        //self.physicsBody.affectedByGravity = NO; // DEBUG
+        self.physicsBody.mass = .001;
         
         self.position = point;
     }
@@ -36,6 +38,7 @@ static const int kBalloonPoints = 100;
     switch (self.type) {
         
         case PickupTypeBalloon:
+            
             return kBalloonPoints;
             break;
             
@@ -44,6 +47,8 @@ static const int kBalloonPoints = 100;
             break;
     } // end switch
 }
+
+
 
 
 @end
