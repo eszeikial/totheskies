@@ -11,6 +11,8 @@
 static NSString *const kBalloonImage = @"redballoon.png";
 static const float kImageScaleFactor = 0.5;
 
+static const int kBalloonPoints = 100;
+
 @implementation Pickup
 
 - (id)initWithStartPoint: (CGPoint) point{
@@ -28,5 +30,20 @@ static const float kImageScaleFactor = 0.5;
     }
     return self;
 }
+
+
+-(int)points{
+    switch (self.type) {
+        
+        case PickupTypeBalloon:
+            return kBalloonPoints;
+            break;
+            
+        default:
+            return 10;
+            break;
+    } // end switch
+}
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Player.h"
+#import "Pickup.h"
 
 // constants
 static const float kImageScaleFactor = 0.5;
@@ -37,12 +38,18 @@ static NSString *const kImageFileName = @"character.png";
             break;
         case ColliderTypePickup:
             NSLog(@"Pickup");
+            NSLog(@"%@", collisionObject.scene.children.debugDescription);
+            [collisionObject removeFromParent];
+            [self addPoints:((Pickup*) collisionObject).points];
             break;
             
         default:
             break;
     }
-    
+}
+
+- (void)addPoints: (int)points{
+    NSLog(@"Added %d points!", points);
 }
 
 /*-(CGVector)getVelocity  Don't need this, unless you really want it #ZACH

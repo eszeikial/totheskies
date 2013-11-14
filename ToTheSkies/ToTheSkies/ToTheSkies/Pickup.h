@@ -19,6 +19,7 @@ typedef enum {
 
 
 @property (nonatomic, assign) PickupType type;
+@property (nonatomic, assign) int points;
 
 - (id)initWithStartPoint: (CGPoint) point;
 
