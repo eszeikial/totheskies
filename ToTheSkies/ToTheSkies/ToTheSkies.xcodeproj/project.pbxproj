@@ -29,6 +29,10 @@
 		3F3855821833E6F4005E550D /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3855811833E6F4005E550D /* GameObject.m */; };
 		3F94F8E51832E359008C83AB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F94F8E41832E359008C83AB /* Player.m */; };
 		3F94F8E81832E7FC008C83AB /* Pickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F94F8E71832E7FC008C83AB /* Pickup.m */; };
+		3FC568851835077700373F21 /* jumpSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC568811835077700373F21 /* jumpSound.wav */; };
+		3FC568861835077700373F21 /* SoaringHigh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FC568821835077700373F21 /* SoaringHigh.mp3 */; };
+		3FC568871835077700373F21 /* SoundBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC568841835077700373F21 /* SoundBuddy.m */; };
+		3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC5688A1835080700373F21 /* BalloonPop.wav */; };
 		3FC704B31834453500A315F0 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC704B21834453500A315F0 /* TitleScene.m */; };
 		3FC704B61834464400A315F0 /* InstructionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC704B51834464400A315F0 /* InstructionScene.m */; };
 /* End PBXBuildFile section */
@@ -75,6 +79,11 @@
 		3F94F8E41832E359008C83AB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		3F94F8E61832E7FC008C83AB /* Pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pickup.h; sourceTree = "<group>"; };
 		3F94F8E71832E7FC008C83AB /* Pickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pickup.m; sourceTree = "<group>"; };
+		3FC568811835077700373F21 /* jumpSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jumpSound.wav; sourceTree = "<group>"; };
+		3FC568821835077700373F21 /* SoaringHigh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SoaringHigh.mp3; sourceTree = "<group>"; };
+		3FC568831835077700373F21 /* SoundBuddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundBuddy.h; sourceTree = "<group>"; };
+		3FC568841835077700373F21 /* SoundBuddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundBuddy.m; sourceTree = "<group>"; };
+		3FC5688A1835080700373F21 /* BalloonPop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BalloonPop.wav; sourceTree = "<group>"; };
 		3FC704B11834453500A315F0 /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		3FC704B21834453500A315F0 /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		3FC704B41834464400A315F0 /* InstructionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionScene.h; sourceTree = "<group>"; };
@@ -142,6 +151,7 @@
 		3F1953BF1832AFC800BB093C /* ToTheSkies */ = {
 			isa = PBXGroup;
 			children = (
+				3FC568801835077700373F21 /* SoundBuddy Files */,
 				3F3855831833EEE9005E550D /* GameObjects */,
 				3F38557A1833E0B7005E550D /* Assets */,
 				3F94F8DC1832D84A008C83AB /* Scenes */,
@@ -151,6 +161,7 @@
 				3F1953CE1832AFC800BB093C /* ViewController.h */,
 				3F1953CF1832AFC800BB093C /* ViewController.m */,
 				3F1953D11832AFC800BB093C /* Images.xcassets */,
+				3F38557B1833E0C6005E550D /* images */,
 				3F1953C01832AFC800BB093C /* Supporting Files */,
 			);
 			path = ToTheSkies;
@@ -188,7 +199,6 @@
 		3F38557A1833E0B7005E550D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				3F38557B1833E0C6005E550D /* images */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -226,6 +236,18 @@
 				3FC704B51834464400A315F0 /* InstructionScene.m */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		3FC568801835077700373F21 /* SoundBuddy Files */ = {
+			isa = PBXGroup;
+			children = (
+				3FC5688A1835080700373F21 /* BalloonPop.wav */,
+				3FC568811835077700373F21 /* jumpSound.wav */,
+				3FC568821835077700373F21 /* SoaringHigh.mp3 */,
+				3FC568831835077700373F21 /* SoundBuddy.h */,
+				3FC568841835077700373F21 /* SoundBuddy.m */,
+			);
+			path = "SoundBuddy Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,9 +326,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */,
+				3FC568851835077700373F21 /* jumpSound.wav in Resources */,
 				3F1953D21832AFC800BB093C /* Images.xcassets in Resources */,
 				3F38557E1833E0F9005E550D /* character.png in Resources */,
 				3F38557F1833E0F9005E550D /* redballoon.png in Resources */,
+				3FC568861835077700373F21 /* SoaringHigh.mp3 in Resources */,
 				3F1953C41832AFC800BB093C /* InfoPlist.strings in Resources */,
 				3F1953CD1832AFC800BB093C /* Main.storyboard in Resources */,
 			);
@@ -335,6 +360,7 @@
 				3F1953C61832AFC800BB093C /* main.m in Sources */,
 				3F94F8E51832E359008C83AB /* Player.m in Sources */,
 				3FC704B61834464400A315F0 /* InstructionScene.m in Sources */,
+				3FC568871835077700373F21 /* SoundBuddy.m in Sources */,
 				3FC704B31834453500A315F0 /* TitleScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

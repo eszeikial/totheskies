@@ -14,6 +14,7 @@
 #import "GameplayScene.h"
 #import "Player.h"
 #import "Pickup.h"
+#import "SoundBuddy.h"
 
 
 @implementation GameplayScene{
@@ -23,6 +24,8 @@
     //JetPack stuff
     CMMotionManager *_motionManager;
     
+    // Sound Buddy
+    SoundBuddy* soundBuddy;
     
     //Trampoline - drawing
     UITouch *_touch;
@@ -55,6 +58,12 @@
     self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
     
     
+    //--------------Sound Buddy-----------//
+    soundBuddy = [[SoundBuddy alloc] init];
+    [soundBuddy setUp];
+    [soundBuddy playBackgroundMusic];
+    
+    
     //--------------Player----------------//
     
     _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
@@ -63,6 +72,7 @@
     // --------- DEBUG -- PICKUPS --------//
     
     Pickup *myPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(self.view.center.x + 100, 800)];
+    myPickup.name = @"balloon";
     [self addChild:myPickup]; 
     
     
@@ -128,6 +138,8 @@
                 vy = totalVelocity*(1-wallSlope);
             }
             
+            
+            [soundBuddy playJumpSound];
             _player.physicsBody.velocity = CGVectorMake(vx, vy);
         }
     }
@@ -212,6 +224,13 @@
             [_player collide:(GameObject*)contact.bodyA.node withCategory:contact.bodyA.categoryBitMask]; // trigger collide wtih bodyA
         }
     } // end if
+    
+    // this is bad code but we will fix it for the next deliverable when we have more pickups implemented
+    // we will ultimately be moving soundBuddy into the player
+    if([contact.bodyB.node.name  isEqual: @"balloon"] || [contact.bodyA.node.name  isEqual: @"balloon"])
+    {
+        [soundBuddy playPopSound];
+    }
     
     NSLog(@"Contact!");
     

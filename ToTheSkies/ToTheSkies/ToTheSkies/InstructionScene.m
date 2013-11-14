@@ -35,7 +35,7 @@
     _label.textColor= [UIColor whiteColor];
     _label.lineBreakMode = NSLineBreakByWordWrapping;
     _label.numberOfLines = 0;
-    _label.text = @"Instructions:\n\nUse your finger to draw a trampoline under the character! \n\nYou can only draw on the bottom half of the screen. \n\nColliding with objects will have various effects.";
+    _label.text = @"Instructions:\n\nUse your finger to draw a trampoline under the character! \n\nColliding with objects will have various effects.";
     _label.font = [UIFont boldSystemFontOfSize:30];
     
     return _label;
