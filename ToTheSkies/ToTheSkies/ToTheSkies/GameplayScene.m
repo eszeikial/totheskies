@@ -57,7 +57,12 @@
 {
     //-------------Misc Setup-------------//
     
+    // init layers
+    _gameplayLayer = [[SKNode alloc]init];
+    _backgroundLayer = [[SKNode alloc]init];
+    
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
+    
     self.physicsWorld.contactDelegate = self;
     _height = self.size.height;
     _width = self.size.width;
@@ -65,6 +70,8 @@
     _trampolineCollideTimer = 5;
     _trampolineStrength = 1.4;
     self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
+    [self addChild:_gameplayLayer];
+    [self addChild:_backgroundLayer];
     
     
     //--------------Sound Buddy-----------//
@@ -102,8 +109,8 @@
     
     
     
-    [self addChild:_trampoline];
-    [self addChild:_player];
+    [_gameplayLayer addChild:_trampoline];
+    [_gameplayLayer addChild:_player];
 }
 
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
@@ -112,7 +119,7 @@
     
     //----------- PICKUP REMOVAL ---------
     
-    [self enumerateChildNodesWithName:@"pickup" usingBlock: ^(SKNode *node, BOOL *stop) {
+    [_gameplayLayer enumerateChildNodesWithName:@"pickup" usingBlock: ^(SKNode *node, BOOL *stop) {
         if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
             [node removeFromParent]; // remove pickup from scene
         }
@@ -127,7 +134,7 @@
     if (_timeSinceLastSpawn > kPickupSpawnDelay){ // if it's been a while, and there aren't too many pickups already on screen...
         Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + 20)]; // spawn pickup
         _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
-        [self addChild:tempPickup]; // add pickup to scene
+        [_gameplayLayer addChild:tempPickup]; // add pickup to scene
     } // end if
     
 } // end update
