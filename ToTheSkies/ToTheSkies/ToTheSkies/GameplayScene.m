@@ -23,6 +23,11 @@
     SKNode *_gameplayLayer;
     SKNode *_backgroundLayer;
     
+    // clouds
+    int _cloudsOnScreen;
+    NSTimeInterval _timeSinceLastCloudSpawn;
+    NSDate *_timeLastCloudSpawn;
+    
     // player
     Player *_player;
     
@@ -30,8 +35,8 @@
     CMMotionManager *_motionManager;
     
     //Pickups
-    NSTimeInterval _timeSinceLastSpawn;
-    NSDate *_timeLastSpawn;
+    NSTimeInterval _timeSinceLastPickupSpawn;
+    NSDate *_timeLastPickupSpawn;
     
     // Sound Buddy
     SoundBuddy* soundBuddy;
@@ -55,11 +60,17 @@
 //Method is called when the scene is presented by a view.
 -(void) didMoveToView:(SKView *)view
 {
-    //-------------Misc Setup-------------//
     
-    // init layers
+    // -------------- layers --------------- //
     _gameplayLayer = [[SKNode alloc]init];
     _backgroundLayer = [[SKNode alloc]init];
+    
+    _gameplayLayer.zPosition = 0;
+    _gameplayLayer.zPosition = 1;
+    
+    //-------------Misc Setup-------------//
+    
+
     
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
     
@@ -87,8 +98,8 @@
     
     // --------- PICKUPS --------//
     
-    _timeLastSpawn = [NSDate date];
-    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
+    _timeLastPickupSpawn = [NSDate date];
+    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
     
     //-------------trampoline-------------//
     
@@ -109,6 +120,12 @@
     
     
     
+    // ------------- clouds ------------ //
+    _timeLastCloudSpawn = [NSDate date];
+    _timeSinceLastCloudSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
+    
+    
+    
     [_gameplayLayer addChild:_trampoline];
     [_gameplayLayer addChild:_player];
 }
@@ -116,6 +133,10 @@
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
 // UPDATE 0
 - (void)update:(NSTimeInterval)currentTime{
+    
+    // --------- CLOUD UPDATE ----------
+    [self scrollBackground];
+    
     
     //----------- PICKUP REMOVAL ---------
     
@@ -129,11 +150,11 @@
     }];
     
     // ---------- PICKUP SPAWN -------------
-    _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]); // update variable storing how long it's been since last pickup spawned
+    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]); // update variable storing how long it's been since last pickup spawned
     
-    if (_timeSinceLastSpawn > kPickupSpawnDelay){ // if it's been a while, and there aren't too many pickups already on screen...
+    if (_timeSinceLastPickupSpawn > kPickupSpawnDelay){ // if it's been a while, and there aren't too many pickups already on screen...
         Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + 20)]; // spawn pickup
-        _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
+        _timeLastPickupSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
         [_gameplayLayer addChild:tempPickup]; // add pickup to scene
     } // end if
     
@@ -255,7 +276,34 @@
     }
 }
 
-// ---------- DEBUG Helper for array ---------
+// ---------- Background ---------
+
+-(void)scrollBackground{
+    _timeSinceLastCloudSpawn = fabs([_timeLastCloudSpawn timeIntervalSinceNow]);
+    
+    if (_cloudsOnScreen < kMaxCloudsOnScreen && _timeSinceLastCloudSpawn > kCloudSpawnDelay){
+        SKSpriteNode *newCloud = [[SKSpriteNode alloc]initWithImageNamed:@"cloud.png"];
+        newCloud.position = CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + newCloud.size.height);
+        newCloud.name = @"cloud";
+        [_backgroundLayer addChild:newCloud];
+        _timeLastCloudSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
+        _cloudsOnScreen++;
+    }
+    
+    // remove off-screen clouds
+    [_backgroundLayer enumerateChildNodesWithName:@"cloud" usingBlock: ^(SKNode *node, BOOL *stop) {
+        if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
+            [node removeFromParent]; // remove pickup from scene
+            _cloudsOnScreen--;
+        }
+        else{
+            [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen clouds down
+        }
+    }];
+    
+    
+    
+}
 
 
 

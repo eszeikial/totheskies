@@ -47,7 +47,7 @@ static NSString *const kImageFileName = @"character.png";
 }
 
 - (void)addPoints: (int)points{
-    NSLog(@"Added %d points!", points);
+    //NSLog(@"Added %d points!", points);
 }
 
 -(void)setVelocityX:(float)x yVector:(float)y
