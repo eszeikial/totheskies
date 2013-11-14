@@ -24,9 +24,9 @@ static const int kBalloonPoints = 100;
         self.type = PickupTypeBalloon;
         self.name = @"pickup";
         self.physicsBody.categoryBitMask = ColliderTypePickup;
-        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypePlayer; 
-        //self.physicsBody.affectedByGravity = NO; // DEBUG
-        self.physicsBody.mass = .001;
+        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypePlayer;
+        self.physicsBody.linearDamping = 1.0; // so it doesn't drop like a stone
+
         
         self.position = point;
     }
@@ -38,7 +38,6 @@ static const int kBalloonPoints = 100;
     switch (self.type) {
         
         case PickupTypeBalloon:
-            
             return kBalloonPoints;
             break;
             

@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 static const int kPickupsOnScreenLimit = 5;
+static const double kPickupSpawnDelay = 2.0; 
 
 @class Pickup;
 @class ViewController;
@@ -18,5 +19,7 @@ static const int kPickupsOnScreenLimit = 5;
 
 @property (nonatomic, weak)ViewController *viewController;
 
+
+-(int)randBetweenLowerBound: (int)lowerBound andUpperBound: (int)upperBound;
 
 @end

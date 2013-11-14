@@ -29,6 +29,7 @@
 		3F3855821833E6F4005E550D /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3855811833E6F4005E550D /* GameObject.m */; };
 		3F94F8E51832E359008C83AB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F94F8E41832E359008C83AB /* Player.m */; };
 		3F94F8E81832E7FC008C83AB /* Pickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F94F8E71832E7FC008C83AB /* Pickup.m */; };
+		3FA8E81618355EA600DB5EE6 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8E81518355EA600DB5EE6 /* cloud.png */; };
 		3FC568851835077700373F21 /* jumpSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC568811835077700373F21 /* jumpSound.wav */; };
 		3FC568861835077700373F21 /* SoaringHigh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FC568821835077700373F21 /* SoaringHigh.mp3 */; };
 		3FC568871835077700373F21 /* SoundBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC568841835077700373F21 /* SoundBuddy.m */; };
@@ -79,6 +80,7 @@
 		3F94F8E41832E359008C83AB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		3F94F8E61832E7FC008C83AB /* Pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pickup.h; sourceTree = "<group>"; };
 		3F94F8E71832E7FC008C83AB /* Pickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pickup.m; sourceTree = "<group>"; };
+		3FA8E81518355EA600DB5EE6 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
 		3FC568811835077700373F21 /* jumpSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = jumpSound.wav; path = "SoundBuddy Files/jumpSound.wav"; sourceTree = "<group>"; };
 		3FC568821835077700373F21 /* SoaringHigh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SoaringHigh.mp3; path = "SoundBuddy Files/SoaringHigh.mp3"; sourceTree = "<group>"; };
 		3FC568831835077700373F21 /* SoundBuddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundBuddy.h; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		3F38557B1833E0C6005E550D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3FA8E81518355EA600DB5EE6 /* cloud.png */,
 				3F38557C1833E0F9005E550D /* character.png */,
 				3F38557D1833E0F9005E550D /* redballoon.png */,
 			);
@@ -334,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA8E81618355EA600DB5EE6 /* cloud.png in Resources */,
 				3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */,
 				3FC568851835077700373F21 /* jumpSound.wav in Resources */,
 				3F1953D21832AFC800BB093C /* Images.xcassets in Resources */,
