@@ -36,6 +36,10 @@
 		3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC5688A1835080700373F21 /* BalloonPop.wav */; };
 		3FC704B31834453500A315F0 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC704B21834453500A315F0 /* TitleScene.m */; };
 		3FC704B61834464400A315F0 /* InstructionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC704B51834464400A315F0 /* InstructionScene.m */; };
+		3FDBAF4E18368E7F00BB98A5 /* ObjectSpawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDBAF4D18368E7F00BB98A5 /* ObjectSpawner.m */; };
+		3FDBAF511836927A00BB98A5 /* CloudSpawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDBAF501836927A00BB98A5 /* CloudSpawner.m */; };
+		3FDBAF5618369D2C00BB98A5 /* Helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FDBAF5518369D2C00BB98A5 /* Helper.c */; };
+		3FDBAF5A1836A14400BB98A5 /* PickupSpawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDBAF591836A14400BB98A5 /* PickupSpawner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +94,14 @@
 		3FC704B21834453500A315F0 /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		3FC704B41834464400A315F0 /* InstructionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionScene.h; sourceTree = "<group>"; };
 		3FC704B51834464400A315F0 /* InstructionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionScene.m; sourceTree = "<group>"; };
+		3FDBAF4C18368E7F00BB98A5 /* ObjectSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectSpawner.h; sourceTree = "<group>"; };
+		3FDBAF4D18368E7F00BB98A5 /* ObjectSpawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectSpawner.m; sourceTree = "<group>"; };
+		3FDBAF4F1836927A00BB98A5 /* CloudSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudSpawner.h; sourceTree = "<group>"; };
+		3FDBAF501836927A00BB98A5 /* CloudSpawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudSpawner.m; sourceTree = "<group>"; };
+		3FDBAF5518369D2C00BB98A5 /* Helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Helper.c; sourceTree = "<group>"; };
+		3FDBAF5718369D4D00BB98A5 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		3FDBAF581836A14400BB98A5 /* PickupSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupSpawner.h; sourceTree = "<group>"; };
+		3FDBAF591836A14400BB98A5 /* PickupSpawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupSpawner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +176,8 @@
 				3F1953CF1832AFC800BB093C /* ViewController.m */,
 				3F1953D11832AFC800BB093C /* Images.xcassets */,
 				3F1953C01832AFC800BB093C /* Supporting Files */,
+				3FDBAF5518369D2C00BB98A5 /* Helper.c */,
+				3FDBAF5718369D4D00BB98A5 /* Helper.h */,
 			);
 			path = ToTheSkies;
 			sourceTree = "<group>";
@@ -225,6 +239,12 @@
 				3F94F8E71832E7FC008C83AB /* Pickup.m */,
 				3F3855801833E6F4005E550D /* GameObject.h */,
 				3F3855811833E6F4005E550D /* GameObject.m */,
+				3FDBAF4C18368E7F00BB98A5 /* ObjectSpawner.h */,
+				3FDBAF4D18368E7F00BB98A5 /* ObjectSpawner.m */,
+				3FDBAF4F1836927A00BB98A5 /* CloudSpawner.h */,
+				3FDBAF501836927A00BB98A5 /* CloudSpawner.m */,
+				3FDBAF581836A14400BB98A5 /* PickupSpawner.h */,
+				3FDBAF591836A14400BB98A5 /* PickupSpawner.m */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -364,15 +384,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FDBAF511836927A00BB98A5 /* CloudSpawner.m in Sources */,
 				3F1953F21832B11B00BB093C /* GameplayScene.m in Sources */,
 				3F3855821833E6F4005E550D /* GameObject.m in Sources */,
+				3FDBAF5618369D2C00BB98A5 /* Helper.c in Sources */,
 				3F94F8E81832E7FC008C83AB /* Pickup.m in Sources */,
 				3F1953D01832AFC800BB093C /* ViewController.m in Sources */,
 				3F1953CA1832AFC800BB093C /* AppDelegate.m in Sources */,
 				3F1953C61832AFC800BB093C /* main.m in Sources */,
+				3FDBAF5A1836A14400BB98A5 /* PickupSpawner.m in Sources */,
 				3F94F8E51832E359008C83AB /* Player.m in Sources */,
 				3FC704B61834464400A315F0 /* InstructionScene.m in Sources */,
 				3FC568871835077700373F21 /* SoundBuddy.m in Sources */,
+				3FDBAF4E18368E7F00BB98A5 /* ObjectSpawner.m in Sources */,
 				3FC704B31834453500A315F0 /* TitleScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
