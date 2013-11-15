@@ -15,6 +15,8 @@
 #import "Player.h"
 #import "Pickup.h"
 #import "SoundBuddy.h"
+#import "CloudSpawner.h"
+#import "PickupSpawner.h"
 
 
 @implementation GameplayScene{
@@ -24,9 +26,7 @@
     SKNode *_backgroundLayer;
     
     // clouds
-    int _cloudsOnScreen;
-    NSTimeInterval _timeSinceLastCloudSpawn;
-    NSDate *_timeLastCloudSpawn;
+    CloudSpawner *_cloudSpawner;
     
     // player
     Player *_player;
@@ -35,8 +35,7 @@
     CMMotionManager *_motionManager;
     
     //Pickups
-    NSTimeInterval _timeSinceLastPickupSpawn;
-    NSDate *_timeLastPickupSpawn;
+    PickupSpawner *_pickupSpawner;
     
     // Sound Buddy
     SoundBuddy* soundBuddy;
@@ -98,8 +97,7 @@
     
     // --------- PICKUPS --------//
     
-    _timeLastPickupSpawn = [NSDate date];
-    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
+    _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:kMaxPickupsOnScreen delay:kPickupSpawnDelay];
     
     //-------------trampoline-------------//
     
@@ -121,10 +119,10 @@
     
     
     // ------------- clouds ------------ //
-    _timeLastCloudSpawn = [NSDate date];
-    _timeSinceLastCloudSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]);
+    _cloudSpawner = [[CloudSpawner alloc] initWithLayer:_backgroundLayer maxItemsOnScreen:kMaxCloudsOnScreen delay:kCloudSpawnDelay];
     
     
+    // ------------- add stuff to layers -------------- //
     
     [_gameplayLayer addChild:_trampoline];
     [_gameplayLayer addChild:_player];
@@ -135,28 +133,12 @@
 - (void)update:(NSTimeInterval)currentTime{
     
     // --------- CLOUD UPDATE ----------
-    [self scrollBackground];
+    [_cloudSpawner update];
     
     
-    //----------- PICKUP REMOVAL ---------
-    
-    [_gameplayLayer enumerateChildNodesWithName:@"pickup" usingBlock: ^(SKNode *node, BOOL *stop) {
-        if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
-            [node removeFromParent]; // remove pickup from scene
-        }
-        else{
-            [node.physicsBody applyForce:CGVectorMake(0, 5.0)]; // make it float! #DEBUG (this might be memory intensive)
-        }
-    }];
-    
-    // ---------- PICKUP SPAWN -------------
-    _timeSinceLastPickupSpawn = fabs([_timeLastPickupSpawn timeIntervalSinceNow]); // update variable storing how long it's been since last pickup spawned
-    
-    if (_timeSinceLastPickupSpawn > kPickupSpawnDelay){ // if it's been a while, and there aren't too many pickups already on screen...
-        Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + 20)]; // spawn pickup
-        _timeLastPickupSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
-        [_gameplayLayer addChild:tempPickup]; // add pickup to scene
-    } // end if
+    //----------- PICKUP UPDATE ---------
+    [_pickupSpawner update];
+
     
 } // end update
 
@@ -276,36 +258,6 @@
     }
 }
 
-// ---------- Background ---------
-
--(void)scrollBackground{
-    _timeSinceLastCloudSpawn = fabs([_timeLastCloudSpawn timeIntervalSinceNow]);
-    
-    if (_cloudsOnScreen < kMaxCloudsOnScreen && _timeSinceLastCloudSpawn > kCloudSpawnDelay){
-        SKSpriteNode *newCloud = [[SKSpriteNode alloc]initWithImageNamed:@"cloud.png"];
-        newCloud.position = CGPointMake([self randBetweenLowerBound:0 andUpperBound:self.size.width], self.size.height + newCloud.size.height);
-        newCloud.name = @"cloud";
-        [_backgroundLayer addChild:newCloud];
-        _timeLastCloudSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
-        _cloudsOnScreen++;
-    }
-    
-    // remove off-screen clouds
-    [_backgroundLayer enumerateChildNodesWithName:@"cloud" usingBlock: ^(SKNode *node, BOOL *stop) {
-        if (node.position.x < 0 || node.position.x > self.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if pickup offscreen
-            [node removeFromParent]; // remove pickup from scene
-            _cloudsOnScreen--;
-        }
-        else{
-            [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen clouds down
-        }
-    }];
-    
-    
-    
-}
-
-
 
 
 // --------------- General Collision Stuff ------------- //
@@ -330,10 +282,6 @@
     }
     
 }
-
-
-
-
 
 // ---------------------TOUCHES------------------------ //
 
@@ -384,12 +332,6 @@
     _touch = nil;
 }
 
-
-// -------------------- HELPERS ---------------------
-
--(int)randBetweenLowerBound: (int)lowerBound andUpperBound: (int)upperBound{
-    return lowerBound + arc4random() % (upperBound - lowerBound);
-}
 
 
 @end

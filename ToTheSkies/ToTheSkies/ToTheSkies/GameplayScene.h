@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-static const int kPickupsOnScreenLimit = 5;
+static const int kMaxPickupsOnScreen = 5;
 static const int kMaxCloudsOnScreen = 8; 
 static const double kPickupSpawnDelay = 2.0;
 static const double kCloudSpawnDelay = 3.0; 
@@ -20,8 +20,5 @@ static const double kCloudSpawnDelay = 3.0;
 @interface GameplayScene : SKScene <SKPhysicsContactDelegate>
 
 @property (nonatomic, weak)ViewController *viewController;
-
-
--(int)randBetweenLowerBound: (int)lowerBound andUpperBound: (int)upperBound;
 
 @end
