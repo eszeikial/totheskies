@@ -265,21 +265,27 @@
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
 
-    if (contact.bodyA.categoryBitMask == ColliderTypePlayer|| contact.bodyB.categoryBitMask == ColliderTypePlayer) { // if one of the bodies is the player
-        if (contact.bodyA.categoryBitMask == ColliderTypePlayer){ // if it's bodyA
-            [_player collide:(GameObject*)contact.bodyB.node withCategory:contact.bodyB.categoryBitMask]; //trigger collide with bodyB
-        }
-        else { // if it's bodyB
-            [_player collide:(GameObject*)contact.bodyA.node withCategory:contact.bodyA.categoryBitMask]; // trigger collide wtih bodyA
-        }
-    } // end if
+    GameObject *playerGameObj;
+    GameObject *objectGameObj;
+    
+    // check to see which body is the player, and which is the object he's in contact with
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+        playerGameObj = (GameObject*)contact.bodyA.node;
+        objectGameObj = (GameObject*)contact.bodyB.node;
+    }
+    else {
+        playerGameObj = (GameObject*)contact.bodyB.node;
+        objectGameObj = (GameObject*)contact.bodyA.node;
+    }
+    
+    [_player collide:objectGameObj];
+    
     
     // this is bad code but we will fix it for the next deliverable when we have more pickups implemented
     // we will ultimately be moving soundBuddy into the player
-    if([contact.bodyB.node.name  isEqual: @"balloon"] || [contact.bodyA.node.name  isEqual: @"balloon"])
+    if([objectGameObj.name isEqual: @"pickup"])
     {
         [soundBuddy playPopSound];
-        
     }
     
 }

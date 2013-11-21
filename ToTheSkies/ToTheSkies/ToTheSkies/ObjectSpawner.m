@@ -46,7 +46,7 @@
 -(void)update {
     _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
     
-    // spawn clouds
+    // spawn items
     if (_itemsOnScreen < _maxItems && _timeSinceLastSpawn > _spawnDelay){
         
         [_gameLayer addChild:[self spawn]];
