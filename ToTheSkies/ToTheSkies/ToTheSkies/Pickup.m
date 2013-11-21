@@ -23,11 +23,11 @@ static const int kBalloonPoints = 100;
     if (self) {
         self.type = PickupTypeBalloon;
         self.name = @"pickup";
-        self.physicsBody.categoryBitMask = ColliderTypePickup;
-        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypePlayer;
-        self.physicsBody.linearDamping = 1.0; // so it doesn't drop like a stone
-
+        self.physicsBody.categoryBitMask = CategoryPickupMask;
+        self.physicsBody.contactTestBitMask = CategoryPlayerMask; // only test for contact with player
+        self.physicsBody.collisionBitMask = 0; // shouldn't physically collide with things
         
+        self.physicsBody.linearDamping = 1.0; // so it doesn't drop like a stone
         self.position = point;
     }
     return self;

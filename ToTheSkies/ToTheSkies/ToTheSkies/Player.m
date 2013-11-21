@@ -24,30 +24,31 @@ static NSString *const kImageFileName = @"character.png";
     
     if (self) {
         self.name = @"player";
-        self.physicsBody.categoryBitMask = ColliderTypePlayer;
-        self.physicsBody.collisionBitMask = self.physicsBody.contactTestBitMask = ColliderTypeTrampoline | ColliderTypeObstacle | ColliderTypePickup;
+        self.physicsBody.categoryBitMask = CategoryPlayerMask;
+        self.physicsBody.contactTestBitMask = CategoryPickupMask | CategoryObstacleMask;// what contact to test for?
+        self.physicsBody.collisionBitMask = CategoryObstacleMask | CategoryTrampolineMask; // what can the player physically collide with?
         self.position = point;
     }
     return self;
 }
 
-- (void)collide: (GameObject*) collisionObject withCategory:(uint8_t) collideCategory{
-    
-    switch (collideCategory) {
-        case ColliderTypeObstacle:
-            break;
-        case ColliderTypePickup:
-            [collisionObject removeFromParent];
-            [self addPoints:((Pickup*) collisionObject).points];
-            break;
-            
-        default:
-            break;
-    }
-}
+- (void)collide: (GameObject*) collisionObject{
+ 
+     switch (collisionObject.physicsBody.categoryBitMask) {
+         case CategoryObstacleMask:
+             break;
+         case CategoryPickupMask:
+             [collisionObject removeFromParent];
+             [self addPoints:((Pickup*) collisionObject).points];
+             break;
+     
+         default:
+             break;
+     }
+ }
 
 - (void)addPoints: (int)points{
-    //NSLog(@"Added %d points!", points);
+    NSLog(@"Added %d points!", points);
 }
 
 -(void)setVelocityX:(float)x yVector:(float)y

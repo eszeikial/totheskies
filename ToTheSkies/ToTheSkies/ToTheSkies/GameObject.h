@@ -8,13 +8,12 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-typedef enum : uint8_t {
-    ColliderTypePlayer = 0x1 << 0,
-    ColliderTypeWall = 0x1 << 1,
-    ColliderTypeTrampoline = 0x1 << 2,
-    ColliderTypePickup = 0x1 << 3,
-    ColliderTypeObstacle = 0x1 << 4
-} ColliderType;
+typedef enum : uint8_t{
+    CategoryPlayerMask = 1,
+    CategoryPickupMask = 2,
+    CategoryObstacleMask = 3,
+    CategoryTrampolineMask = 4,
+} CategoryMask;
 
 
 @interface GameObject : SKSpriteNode
