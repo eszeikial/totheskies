@@ -103,6 +103,18 @@
     } completion:NULL];
 }
 
+-(void)pauseGame
+{
+    _gameScene.view.paused = YES;
+    _gameScene.paused = YES;
+}
+
+-(void)resumeGame
+{
+    _gameScene.view.paused = FALSE;
+    _gameScene.paused = FALSE;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.spriteView presentScene:self.titleScene];

@@ -24,5 +24,7 @@
 - (IBAction)clickedStartGameButton;
 - (IBAction)clickedInstructionsButton;
 - (void)clickedGoBackButton;
+- (void)pauseGame;
+- (void)resumeGame;
 
 @end

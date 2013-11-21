@@ -83,6 +83,8 @@
     [self addChild:_gameplayLayer];
     [self addChild:_backgroundLayer];
     
+    // by default, not paused
+    self.paused = NO;
     
     //--------------Sound Buddy-----------//
     soundBuddy = [[SoundBuddy alloc] init];
@@ -149,7 +151,6 @@
 // UPDATE 1
 -(void)didEvaluateActions
 {
-    
     //NSLog(@"tramp Pt1 x: %f , y: %f, Player Pos x: %f, y: %f",_startPoint.x,_startPoint.y,_player.position.x, -_player.position.y+_height);
     
     //If there hasn't been a collision in 5 frames
