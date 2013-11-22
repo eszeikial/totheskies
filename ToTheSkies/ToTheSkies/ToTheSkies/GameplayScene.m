@@ -50,6 +50,8 @@
     int _trampolineCollideTimer;
     float _trampolineStrength;
     
+    SKSpriteNode *_drawBox;
+    
     // Scene stuff
     float _height;
     float _width;
@@ -118,6 +120,11 @@
     _trampoline.lineWidth = (float)2.0;
     _trampoline.name = @"trampoline";
     
+    _drawBox = [[SKSpriteNode alloc]initWithImageNamed:@"drawZone.png"];
+    _drawBox.position = CGPointMake(_width/2, 200);
+    [self addChild:_drawBox];
+    [self displayTouchBox];
+    
     //---------JetPack/CoreMotion---------//
     
     _motionManager = [[CMMotionManager alloc] init];
@@ -169,6 +176,7 @@
     }
 } // end update
 
+
 -(void)createTextNodes{
 	// player score text node
     _scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Noteworthy"];
@@ -212,7 +220,6 @@
     {
         if([self checkTrampolineCollision])
         {
-            NSLog(@"Collision with tramp should occur");
             //Getting values from player.
             //CGVector velocity = [_player getVelocity];
             CGVector velocity =_player.physicsBody.velocity; // #ZACH | There's a reason I made the player/GameObject inherit from SKSpriteNode :P
@@ -308,6 +315,17 @@
     }
 }
 
+//-------------- Helper Method for touch box --------------//
+-(void)displayTouchBox
+{
+    [_drawBox removeAllActions];
+    SKAction *startFaded = [SKAction fadeOutWithDuration:0];
+    SKAction *fadeIn = [SKAction fadeInWithDuration:1];
+    SKAction *fadeOut = [SKAction fadeOutWithDuration:1];
+    
+    SKAction *sequence = [SKAction sequence:@[startFaded,fadeIn,fadeOut,fadeIn,fadeOut]];
+    [_drawBox runAction:sequence];
+}
 
 
 // --------------- General Collision Stuff ------------- //
@@ -375,6 +393,14 @@
             
             //Setting the path to the trampoline
             _trampoline.path = CGPathCreateCopy(_mutablePath);
+            
+            //Out of touch box!
+            if(1024 - touchPoint.y > 400)
+            {
+                //Show draw box.
+                [self displayTouchBox];
+                _touch = Nil;
+            }
         }
     }
 }
