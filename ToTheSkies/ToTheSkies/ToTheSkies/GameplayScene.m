@@ -53,11 +53,12 @@
     // Scene stuff
     float _height;
     float _width;
-    SKLabelNode* _scoreTextLabel;
-    SKLabelNode* _scoreLabel;
     
     // Scoring
+    SKLabelNode* _highScoreLabel;
+    SKLabelNode* _scoreLabel;
     float _score;
+    int _highScore;
     
     BOOL _paused;
     int _moveSpeed;
@@ -159,6 +160,11 @@
             //_score += _moveSpeed/10.0;
             _score += _player.physicsBody.velocity.dy / 2000.0;
             _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
+            
+            if((int)_score > _highScore)
+            {
+                _highScore = (int)_score;
+            }
         }
     }
 } // end update
@@ -169,28 +175,28 @@
     
     _scoreLabel.name = @"scoreNode";
     _scoreLabel.text = @"Score: 0";
-    _scoreLabel.fontSize = 48.0;
+    _scoreLabel.fontSize = 32.0;
     CGPoint textPosition = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height -50.0);
     
     _scoreLabel.position = textPosition;
     [self addChild: _scoreLabel];
     
-    /*// High Score text node
-     textNode = [SKLabelNode labelNodeWithFontNamed:@"Copperplate"];
-     textNode.name = @"highScoreNode";
+    // High Score text node
+     _highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Noteworthy"];
+     _highScoreLabel.name = @"highScoreNode";
      
      // grab high score from NSUserDefaults if it has been set
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
      _highScore = [defaults integerForKey:@"highScoreKey"];
-     textNode.text = [NSString stringWithFormat:@"High Score %d", _highScore];
+     _highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", _highScore];
      
-     textNode.fontSize = 32.0;
-     textNode.fontColor = [UIColor yellowColor];
-     textNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+     _highScoreLabel.fontSize = 32.0;
+     _highScoreLabel.fontColor = [UIColor whiteColor];
+     _highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
      
      textPosition = CGPointMake(10, self.frame.size.height -50.0);
-     textNode.position = textPosition;
-     [self addChild: textNode];*/
+     _highScoreLabel.position = textPosition;
+     [self addChild: _highScoreLabel];
 }
 
 
@@ -384,6 +390,15 @@
 {
     self.view.paused = YES;
     _paused = YES;
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger: _highScore forKey: @"highScoreKey"];
+    
+}
+
+-(void)resume
+{
+    self.view.paused = NO;
+    _paused = NO;
 }
 
 
