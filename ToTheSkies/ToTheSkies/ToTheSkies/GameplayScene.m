@@ -50,11 +50,18 @@
     int _trampolineCollideTimer;
     float _trampolineStrength;
     
-    //Scene stuff
+    // Scene stuff
     float _height;
     float _width;
+    SKLabelNode* _scoreTextLabel;
+    SKLabelNode* _scoreLabel;
+    
+    // Scoring
+    float _score;
+    
+    BOOL _paused;
+    int _moveSpeed;
 }
-
 
 //Method is called when the scene is presented by a view.
 -(void) didMoveToView:(SKView *)view
@@ -79,23 +86,24 @@
     _trampExists = false;
     _trampolineCollideTimer = 5;
     _trampolineStrength = 1.4;
+    _score = 0;
     self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
     [self addChild:_gameplayLayer];
     [self addChild:_backgroundLayer];
     
     // by default, not paused
-    self.paused = NO;
+    _paused = NO;
     
     //--------------Sound Buddy-----------//
     soundBuddy = [[SoundBuddy alloc] init];
     [soundBuddy setUp];
     [soundBuddy playBackgroundMusic];
     
-    
     //--------------Player----------------//
     
     _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
-    
+    _player.physicsBody.allowsRotation = NO;
+    _moveSpeed = 1;
     
     // --------- PICKUPS --------//
     
@@ -128,22 +136,62 @@
     
     [_gameplayLayer addChild:_trampoline];
     [_gameplayLayer addChild:_player];
+    
+    // add our text labels
+    [self createTextNodes];
 }
 
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
 // UPDATE 0
-- (void)update:(NSTimeInterval)currentTime{
-    
-    // --------- CLOUD UPDATE ----------
-    [_cloudSpawner update];
-    
-    
-    //----------- PICKUP UPDATE ---------
-    [_pickupSpawner update];
-
-    
+- (void)update:(NSTimeInterval)currentTime
+{
+    if(!_paused)
+    {
+        [_cloudSpawner update];
+        [_pickupSpawner update];
+        
+        // update the score label
+        //_score += _player.physicsBody.velocity.dy;
+        //NSLog(@"velocity.dy = %f", _player.physicsBody.velocity.dy); // velocity is too big to use
+        
+        if(_player.position.y >= _height/2 && _player.physicsBody.velocity.dy > 0)
+        {
+            //_score += _moveSpeed/10.0;
+            _score += _player.physicsBody.velocity.dy / 2000.0;
+            _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
+        }
+    }
 } // end update
 
+-(void)createTextNodes{
+	// player score text node
+    _scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Noteworthy"];
+    
+    _scoreLabel.name = @"scoreNode";
+    _scoreLabel.text = @"Score: 0";
+    _scoreLabel.fontSize = 48.0;
+    CGPoint textPosition = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height -50.0);
+    
+    _scoreLabel.position = textPosition;
+    [self addChild: _scoreLabel];
+    
+    /*// High Score text node
+     textNode = [SKLabelNode labelNodeWithFontNamed:@"Copperplate"];
+     textNode.name = @"highScoreNode";
+     
+     // grab high score from NSUserDefaults if it has been set
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     _highScore = [defaults integerForKey:@"highScoreKey"];
+     textNode.text = [NSString stringWithFormat:@"High Score %d", _highScore];
+     
+     textNode.fontSize = 32.0;
+     textNode.fontColor = [UIColor yellowColor];
+     textNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+     
+     textPosition = CGPointMake(10, self.frame.size.height -50.0);
+     textNode.position = textPosition;
+     [self addChild: textNode];*/
+}
 
 
 //Preforms scene-specific updates after actions are evaluated.
@@ -199,17 +247,12 @@
         _trampolineCollideTimer = 0;
 }
 
-
-
 //Performs any scene-specific updates that need to occur after physics simulations are performed.
 // UPDATE 2
 -(void)didSimulatePhysics
 {
     [self screenWrap];
 }
-
-
-
 
 //Helper method to wrap screen if necessary.
 -(void)screenWrap
@@ -304,9 +347,7 @@
             _startPoint = CGPointMake(touchPoint.x, touchPoint.y);
             _trampExists = NO;
         }
-        
     }
-
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -339,6 +380,11 @@
     _touch = nil;
 }
 
+-(void)pause
+{
+    self.view.paused = YES;
+    _paused = YES;
+}
 
 
 @end

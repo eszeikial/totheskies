@@ -105,14 +105,12 @@
 
 -(void)pauseGame
 {
-    _gameScene.view.paused = YES;
-    _gameScene.paused = YES;
+    [_gameScene pause];
 }
 
 -(void)resumeGame
 {
-    _gameScene.view.paused = FALSE;
-    _gameScene.paused = FALSE;
+    [_gameScene resume];
 }
 
 -(void)viewWillAppear:(BOOL)animated
