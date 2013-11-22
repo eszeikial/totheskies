@@ -13,10 +13,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rXA-cm-kyi">
-                                <rect key="frame" x="275" y="553" width="218" height="82"/>
+                                <rect key="frame" x="194" y="561" width="380" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="61"/>
                                 <state key="normal" title="Start Game">
+                                    <color key="titleColor" red="0.33947771051650832" green="0.64855260206676746" blue="0.90266219429347827" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -24,28 +25,26 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1mR-x7-nzK">
-                                <rect key="frame" x="275" y="656" width="218" height="82"/>
+                                <rect key="frame" x="201" y="761" width="366" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="60"/>
                                 <state key="normal" title="Instructions">
+                                    <color key="titleColor" red="0.33947771051650832" green="0.64855260206676746" blue="0.90266219429347827" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clickedInstructionsButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="dB4-pl-J0E"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To The Skies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nTF-ey-Lue">
-                                <rect key="frame" x="187" y="231" width="394" height="169"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title.png" id="e3z-MD-HzH">
+                                <rect key="frame" x="107" y="163" width="555" height="296"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="62"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.72082848251990872" green="0.95973599764378537" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="gameTitle" destination="nTF-ey-Lue" id="12h-MK-5ne"/>
+                        <outlet property="gameTitle" destination="e3z-MD-HzH" id="gN4-dh-fC6"/>
                         <outlet property="instructionsButton" destination="1mR-x7-nzK" id="8T7-3G-LMK"/>
                         <outlet property="playButton" destination="rXA-cm-kyi" id="dA5-8f-7m2"/>
                     </connections>
@@ -54,6 +53,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="title.png" width="905" height="350"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>

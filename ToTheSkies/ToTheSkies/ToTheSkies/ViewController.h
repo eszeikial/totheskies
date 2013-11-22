@@ -19,7 +19,7 @@
 @property(nonatomic, weak) SKView* spriteView;
 @property(weak, nonatomic) IBOutlet UIButton* playButton;
 @property(weak, nonatomic) IBOutlet UIButton* instructionsButton;
-@property(weak, nonatomic) IBOutlet UILabel* gameTitle;
+@property(weak, nonatomic) IBOutlet UIImageView* gameTitle;
 
 - (IBAction)clickedStartGameButton;
 - (IBAction)clickedInstructionsButton;
