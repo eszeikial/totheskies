@@ -46,6 +46,17 @@
     return _titleScene;
 }
 
+- (CreditsScene*)creditsScene
+{
+    if (!_creditsScene) {
+        NSLog(@"%s",__FUNCTION__);
+        _creditsScene = [CreditsScene sceneWithSize: self.spriteView.bounds.size];
+        _creditsScene.scaleMode = SKSceneScaleModeAspectFill;
+        _creditsScene.viewController = self;
+    }
+    return _creditsScene;
+}
+
 - (InstructionScene*)instructionScene
 {
     if (!_instructionScene) {
@@ -82,6 +93,13 @@
     [self.spriteView presentScene: self.instructionScene];
 }
 
+- (IBAction)clickedCreditsButton
+{
+    NSLog(@"%s",__FUNCTION__);
+    [self hideUIElements:YES];
+    [self.spriteView presentScene: self.creditsScene];
+}
+
 - (void)clickedGoBackButton
 {
     NSLog(@"%s",__FUNCTION__);
@@ -97,8 +115,8 @@
         // fade out buttons
         self.playButton.alpha = alpha;
         self.instructionsButton.alpha = alpha;
+        self.creditsButton.alpha = alpha;
         self.gameTitle.alpha = alpha;
-        
         
     } completion:NULL];
 }

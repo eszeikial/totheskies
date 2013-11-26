@@ -418,7 +418,7 @@
     _paused = YES;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger: _highScore forKey: @"highScoreKey"];
-    
+    [defaults synchronize];
 }
 
 -(void)resume

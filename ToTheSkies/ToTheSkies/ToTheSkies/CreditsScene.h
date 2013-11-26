@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+@class ViewController;
 
 @interface CreditsScene : SKScene
+
+@property (nonatomic, weak)ViewController *viewController;
 
 @end

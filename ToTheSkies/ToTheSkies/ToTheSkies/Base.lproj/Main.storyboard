@@ -24,8 +24,20 @@
                                     <action selector="clickedStartGameButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="wuo-ZN-thk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fku-jg-kpT">
+                                <rect key="frame" x="187" y="789" width="380" height="142"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="61"/>
+                                <state key="normal" title="Credits">
+                                    <color key="titleColor" red="0.33947771049999997" green="0.64855260209999999" blue="0.90266219430000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickedCreditsButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="dUr-Hq-ImJ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1mR-x7-nzK">
-                                <rect key="frame" x="201" y="761" width="366" height="137"/>
+                                <rect key="frame" x="201" y="678" width="366" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="60"/>
                                 <state key="normal" title="Instructions">
@@ -44,6 +56,7 @@
                         <color key="backgroundColor" red="0.72082848251990872" green="0.95973599764378537" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="creditsButton" destination="fku-jg-kpT" id="S0O-iz-RrK"/>
                         <outlet property="gameTitle" destination="e3z-MD-HzH" id="gN4-dh-fC6"/>
                         <outlet property="instructionsButton" destination="1mR-x7-nzK" id="8T7-3G-LMK"/>
                         <outlet property="playButton" destination="rXA-cm-kyi" id="dA5-8f-7m2"/>

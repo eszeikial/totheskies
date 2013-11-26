@@ -11,7 +11,6 @@
 
 @implementation InstructionScene
 {
-    
     UILabel* _label;
 }
 
