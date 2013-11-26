@@ -30,6 +30,8 @@
     
     // player
     Player *_player;
+    CGPoint _playerStartPoint;
+    CGVector _playerStartVelocity;
     
     //JetPack stuff
     CMMotionManager *_motionManager;
@@ -63,13 +65,11 @@
     int _highScore;
     
     BOOL _paused;
-    int _moveSpeed;
 }
 
 //Method is called when the scene is presented by a view.
 -(void) didMoveToView:(SKView *)view
 {
-    
     // -------------- layers --------------- //
     _gameplayLayer = [[SKNode alloc]init];
     _backgroundLayer = [[SKNode alloc]init];
@@ -78,9 +78,6 @@
     _gameplayLayer.zPosition = 1;
     
     //-------------Misc Setup-------------//
-    
-
-    
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
     
     self.physicsWorld.contactDelegate = self;
@@ -95,7 +92,7 @@
     [self addChild:_backgroundLayer];
     
     // by default, not paused
-    _paused = NO;
+
     
     //--------------Sound Buddy-----------//
     soundBuddy = [[SoundBuddy alloc] init];
@@ -103,10 +100,10 @@
     [soundBuddy playBackgroundMusic];
     
     //--------------Player----------------//
-    
-    _player = [[Player alloc] initWithStartPoint:CGPointMake(self.view.center.x, 800)];
+    _playerStartPoint = CGPointMake(self.view.center.x, 800);
+    _player = [[Player alloc] initWithStartPoint:_playerStartPoint];
     _player.physicsBody.allowsRotation = NO;
-    _moveSpeed = 1;
+    _playerStartVelocity = _player.physicsBody.velocity;
     
     // --------- PICKUPS --------//
     
@@ -147,6 +144,9 @@
     
     // add our text labels
     [self createTextNodes];
+    
+    // starts off unpaused
+    _paused = NO;
 }
 
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
@@ -159,23 +159,36 @@
         [_pickupSpawner update];
         
         // update the score label
-        //_score += _player.physicsBody.velocity.dy;
-        //NSLog(@"velocity.dy = %f", _player.physicsBody.velocity.dy); // velocity is too big to use
-        
         if(_player.position.y >= _height/2 && _player.physicsBody.velocity.dy > 0)
         {
-            //_score += _moveSpeed/10.0;
-            _score += _player.physicsBody.velocity.dy / 2000.0;
-            _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
+            [self updateScore];
+        }
+        
+        // check if player went off the screen
+        if(_player.position.y < 0)
+        {
+            [self pause];
             
-            if((int)_score > _highScore)
-            {
-                _highScore = (int)_score;
-            }
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
+                                                message: @"Play again?"
+                                               delegate: self
+                                      cancelButtonTitle: @"OK"
+                                      otherButtonTitles: nil];
+            [alert show];
         }
     }
 } // end update
 
+-(void)updateScore
+{
+    _score += _player.physicsBody.velocity.dy / 2000.0;
+    _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
+    
+    if((int)_score > _highScore)
+    {
+        _highScore = (int)_score;
+    }
+}
 
 -(void)createTextNodes{
 	// player score text node
@@ -412,6 +425,11 @@
     _touch = nil;
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self reset];
+}
+
 -(void)pause
 {
     self.view.paused = YES;
@@ -419,6 +437,15 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger: _highScore forKey: @"highScoreKey"];
     [defaults synchronize];
+}
+
+-(void)reset
+{
+    _score = 0;
+    _player.position = _playerStartPoint;
+    _player.physicsBody.velocity = _playerStartVelocity;
+    [self updateScore];
+    [self resume];
 }
 
 -(void)resume

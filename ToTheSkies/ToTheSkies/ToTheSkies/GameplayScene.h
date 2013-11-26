@@ -17,7 +17,7 @@ static const double kCloudSpawnDelay = 3.0;
 @class ViewController;
 
 
-@interface GameplayScene : SKScene <SKPhysicsContactDelegate>
+@interface GameplayScene : SKScene <SKPhysicsContactDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak)ViewController *viewController;
 
