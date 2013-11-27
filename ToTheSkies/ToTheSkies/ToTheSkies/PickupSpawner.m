@@ -12,7 +12,7 @@
 
 @implementation PickupSpawner
 
--(SKSpriteNode*)spawn{
+-(Pickup*)spawn{
     Pickup *tempPickup = [[Pickup alloc] initWithStartPoint:CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + 20)]; // spawn pickup
     return tempPickup;
 }
@@ -20,5 +20,6 @@
 -(void)despawn{
     [self despawnWithName:@"pickup"];
 }
+
 
 @end

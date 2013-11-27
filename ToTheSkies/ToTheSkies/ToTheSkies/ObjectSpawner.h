@@ -23,5 +23,6 @@
 -(void)despawn;
 -(void)despawnWithName: (NSString*)nodeName;
 -(void)moveNode: (SKNode*)node;
+-(void)itemHit;
 
 @end

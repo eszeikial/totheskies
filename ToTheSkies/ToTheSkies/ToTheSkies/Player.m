@@ -26,7 +26,7 @@ static NSString *const kImageFileName = @"character.png";
         self.name = @"player";
         self.physicsBody.categoryBitMask = CategoryPlayerMask;
         self.physicsBody.contactTestBitMask = CategoryPickupMask | CategoryObstacleMask;// what contact to test for?
-        self.physicsBody.collisionBitMask = CategoryObstacleMask | CategoryTrampolineMask; // what can the player physically collide with?
+        self.physicsBody.collisionBitMask = CategoryObstacleMask; // what can the player physically collide with?
         self.position = point;
     }
     return self;

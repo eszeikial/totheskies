@@ -84,6 +84,12 @@
     }];
 }
 
+//-----------Object lost to collision---------//
+-(void)itemHit
+{
+    _itemsOnScreen--;
+}
+
 // --------------- moveNode --------------- //
 
 -(void)moveNode:(SKNode *)node{

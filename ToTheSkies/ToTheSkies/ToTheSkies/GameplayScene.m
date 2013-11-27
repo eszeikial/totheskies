@@ -360,6 +360,12 @@
     
     [_player collide:objectGameObj];
     
+    if([objectGameObj isKindOfClass:[Pickup class]])
+    {
+        [_pickupSpawner itemHit]; // So the spawner can keep track of objects on screen.
+    }
+    
+    
     
     // this is bad code but we will fix it for the next deliverable when we have more pickups implemented
     // we will ultimately be moving soundBuddy into the player
@@ -420,8 +426,18 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    _trampExists = YES;
-    _trampoline.path = CGPathCreateCopy(_mutablePath);
+    //If both the start and end point were in the drawing box...
+    if(1024 - _endPoint.y < 400 && 1024 - _startPoint.y < 400)
+    {
+        _trampExists = YES;
+        _trampoline.path = CGPathCreateCopy(_mutablePath);
+    }
+    else
+    {
+        _trampExists = NO;
+        _trampoline.path = NULL;
+    }
+    
     _touch = nil;
 }
 

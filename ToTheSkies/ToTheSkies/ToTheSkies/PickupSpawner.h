@@ -11,4 +11,5 @@
 
 @interface PickupSpawner : ObjectSpawner
 
+
 @end

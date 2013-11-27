@@ -8,11 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-typedef enum : uint8_t{
-    CategoryPlayerMask = 1,
-    CategoryPickupMask = 2,
-    CategoryObstacleMask = 3,
-    CategoryTrampolineMask = 4,
+typedef enum : uint32_t{
+    CategoryPlayerMask = 0x1 << 0,
+    CategoryPickupMask = 0x1 << 1,
+    CategoryObstacleMask = 0x1 << 2
 } CategoryMask;
 
 
