@@ -39,17 +39,14 @@ static NSString *const kImageFileName = @"character.png";
              break;
          case CategoryPickupMask:
              [collisionObject removeFromParent];
-             [self addPoints:((Pickup*) collisionObject).points];
+             //[self addPoints:((Pickup*) collisionObject).points];
+             [(GameplayScene*)self.scene updateScore:((Pickup*) collisionObject).points];
              break;
      
          default:
              break;
      }
  }
-
-- (void)addPoints: (int)points{
-    NSLog(@"Added %d points!", points);
-}
 
 -(void)setVelocityX:(float)x yVector:(float)y
 {

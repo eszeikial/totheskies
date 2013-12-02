@@ -15,10 +15,19 @@ typedef enum {
     PickupTypeRing = 3
 } PickupType;
 
+typedef enum {
+    BalloonColorBlue,
+    BalloonColorGreen,
+    BalloonColorOrange,
+    BalloonColorPurple,
+    BalloonColorYellow
+} BalloonColor;
+
 @interface Pickup : GameObject
 
 
-@property (nonatomic, assign) PickupType type;
+@property (nonatomic, assign) PickupType pType;
+@property (nonatomic, assign) BalloonColor bColor;
 @property (nonatomic, assign) int points;
 
 - (id)initWithStartPoint: (CGPoint) point;
