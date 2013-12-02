@@ -161,7 +161,7 @@
         // update the score label
         if(_player.position.y >= _height/2 && _player.physicsBody.velocity.dy > 0)
         {
-            [self updateScore];
+            [self updateScore:(_player.physicsBody.velocity.dy / 2000.0)];
         }
         
         // check if player went off the screen
@@ -179,9 +179,14 @@
     }
 } // end update
 
--(void)updateScore
+-(void)updateScore: (int) points
 {
-    _score += _player.physicsBody.velocity.dy / 2000.0;
+    _score += points;
+    [self updateScoreLabel];
+}
+
+-(void)updateScoreLabel
+{
     _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
     
     if((int)_score > _highScore)
@@ -189,6 +194,7 @@
         _highScore = (int)_score;
     }
 }
+
 
 -(void)createTextNodes{
 	// player score text node
@@ -460,7 +466,7 @@
     _score = 0;
     _player.position = _playerStartPoint;
     _player.physicsBody.velocity = _playerStartVelocity;
-    [self updateScore];
+    [self updateScoreLabel];
     [self resume];
 }
 
