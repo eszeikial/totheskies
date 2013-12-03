@@ -30,10 +30,19 @@
 
 -(Obstacle*)spawn{
     Obstacle *newObstacle = [[Obstacle alloc] initWithObstacleType:_oType];
-    newObstacle.position = CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + newObstacle.size.height / 2);
+    
+    switch (_oType) {
+        case ObstacleTypeSmog:
+            newObstacle.position = CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + newObstacle.size.height);
+            break;
+        case ObstacleTypePlane:
+            newObstacle.position = CGPointMake(0 - newObstacle.size.width, randInRange(0, self.gameLayer.scene.size.height));
+            break;
+        default:
+            break;
+    }
     
     
-    //NSLog(@"%.2f", self.gameLayer.scene.size.height);
     return newObstacle;
 }
 
@@ -53,8 +62,17 @@
 
 
 -(void)moveNode:(SKNode *)node{
-    [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen items
     
+    switch (_oType) {
+        case ObstacleTypeSmog:
+            [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen items
+            break;
+        case ObstacleTypePlane:
+            [node setPosition:CGPointMake(node.position.x + 3, node.position.y)]; //move on-screen items
+            break;
+        default:
+            break;
+    }
 } // end move
 
 @end

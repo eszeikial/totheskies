@@ -16,11 +16,11 @@
     switch(obstacleType)
     {
         case ObstacleTypeSmog: self = [self initSmogCloud]; break;
-        case ObstacleTypePlane: self = [self initPlane];
+        case ObstacleTypePlane: self = [self initPlane]; break;
     }
     
     if (self) {
-        self.physicsBody.categoryBitMask = CategoryObstacleMask;
+        // stuff
     }
     return self;
 }
@@ -29,11 +29,12 @@
     
     self = [super initWithImageNamed:@"smogcloud.png" andScaleFactor:1.0];
     
-    NSLog(@"created");
+
     if (self) {
         self.name = @"smog";
         self.physicsBody.affectedByGravity = NO;
         self.physicsBody.contactTestBitMask = CategoryPlayerMask;
+        self.physicsBody.categoryBitMask = CategorySmogMask;
         self.physicsBody.collisionBitMask = 0; // shouldn't physically collide with things
     }
     return self;
@@ -42,11 +43,12 @@
 - (id)initPlane{
     
     self = [super initWithImageNamed:@"plane.png" andScaleFactor:1.0];
-    
+        NSLog(@"created");
     if (self) {
         self.name = @"plane";
         self.physicsBody.affectedByGravity = NO;
         self.physicsBody.contactTestBitMask = CategoryPlayerMask;
+        self.physicsBody.categoryBitMask = CategoryObstacleMask;
         self.physicsBody.collisionBitMask = 1; // shouldn't physically collide with things
     }
     return self;

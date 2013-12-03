@@ -31,6 +31,7 @@
     
     // obstacles
     ObstacleSpawner *_smogSpawner;
+    ObstacleSpawner *_planeSpawner;
     
     // player
     Player *_player;
@@ -114,7 +115,8 @@
     // --------- PICKUPS --------//
     
     _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:kMaxPickupsOnScreen delay:kPickupSpawnDelay];
-    _smogSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 2 delay:kCloudSpawnDelay];
+    _smogSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 4 delay:kCloudSpawnDelay * 4];
+    _planeSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypePlane Layer:_gameplayLayer maxItemsOnScreen:1 delay:kCloudSpawnDelay * 4];
     
     //-------------trampoline-------------//
     
@@ -165,6 +167,7 @@
         [_cloudSpawner update];
         [_pickupSpawner update];
         [_smogSpawner update];
+        [_planeSpawner update]; 
         
         // update the score label
         if(_player.position.y >= _height/2 && _player.physicsBody.velocity.dy > 0)
