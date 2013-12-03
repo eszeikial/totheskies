@@ -30,7 +30,10 @@
 
 -(Obstacle*)spawn{
     Obstacle *newObstacle = [[Obstacle alloc] initWithObstacleType:_oType];
-    newObstacle.position = CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + newObstacle.size.height);
+    newObstacle.position = CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + newObstacle.size.height / 2);
+    
+    
+    //NSLog(@"%.2f", self.gameLayer.scene.size.height);
     return newObstacle;
 }
 
@@ -46,5 +49,12 @@
     }
 }// end despawn
 
+
+
+
+-(void)moveNode:(SKNode *)node{
+    [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen items
+    
+} // end move
 
 @end
