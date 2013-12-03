@@ -79,6 +79,7 @@
             _itemsOnScreen--;
         }
         else{
+            //NSLog(@"My name is %@", nodeName);
             [self moveNode:node];
         }
     }];

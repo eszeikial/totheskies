@@ -12,7 +12,7 @@
 
 @interface ObstacleSpawner : ObjectSpawner
 
-- (id)initWithObstalceType: (ObstacleType) oType
+- (id)initWithObstacleType: (ObstacleType) oType
                      Layer: (SKNode*)layer
    maxItemsOnScreen: (int) maxItems
               delay: (double) spawnDelay;

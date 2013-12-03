@@ -114,7 +114,7 @@
     // --------- PICKUPS --------//
     
     _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:kMaxPickupsOnScreen delay:kPickupSpawnDelay];
-    _smogSpawner = [[ObstacleSpawner alloc] initWithObstalceType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 2 delay:kCloudSpawnDelay];
+    _smogSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 2 delay:kCloudSpawnDelay];
     
     //-------------trampoline-------------//
     
