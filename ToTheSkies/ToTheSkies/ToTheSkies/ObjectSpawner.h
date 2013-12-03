@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-
 @interface ObjectSpawner : NSObject
 
 @property (strong,nonatomic) SKNode *gameLayer;

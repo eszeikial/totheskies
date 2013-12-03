@@ -49,7 +49,10 @@
     // spawn items
     if (_itemsOnScreen < _maxItems && _timeSinceLastSpawn > _spawnDelay){
         
-        [_gameLayer addChild:[self spawn]];
+        SKSpriteNode* newChild = [self spawn];
+        
+        [_gameLayer addChild:newChild];
+        NSLog(@"My childs name is %@", newChild.name);
         _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
         _itemsOnScreen++;
     }

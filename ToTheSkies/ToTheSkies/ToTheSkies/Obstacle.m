@@ -11,11 +11,11 @@
 @implementation Obstacle
 
 
-- (id)initWithObstacleType:(ObstacleType)oType{
+- (id)initWithObstacleType:(ObstacleType)obstacleType{
     
-    switch(oType)
+    switch(obstacleType)
     {
-        case ObstacleTypeSmog: self = [self initSmogCloud];
+        case ObstacleTypeSmog: self = [self initSmogCloud]; break;
         case ObstacleTypePlane: self = [self initPlane];
     }
     

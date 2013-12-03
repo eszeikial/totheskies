@@ -18,6 +18,6 @@ typedef enum {
 
 @property (nonatomic, assign) ObstacleType oType;
 
-- (id)initWithObstacleType: (ObstacleType) oType;
+- (id)initWithObstacleType: (ObstacleType) obstacleType;
 
 @end
