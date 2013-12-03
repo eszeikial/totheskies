@@ -11,7 +11,8 @@
 typedef enum : uint32_t{
     CategoryPlayerMask = 0x1 << 0,
     CategoryPickupMask = 0x1 << 1,
-    CategoryObstacleMask = 0x1 << 2
+    CategoryObstacleMask = 0x1 << 2,
+    CategorySmogMask = 0x1 << 3
 } CategoryMask;
 
 

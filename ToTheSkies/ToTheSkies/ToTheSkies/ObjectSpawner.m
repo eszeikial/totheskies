@@ -52,7 +52,6 @@
         SKSpriteNode* newChild = [self spawn];
         
         [_gameLayer addChild:newChild];
-        NSLog(@"My childs name is %@", newChild.name);
         _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
         _itemsOnScreen++;
     }
@@ -77,7 +76,7 @@
 
 -(void)despawnWithName: (NSString*)nodeName{
     [_gameLayer enumerateChildNodesWithName:nodeName usingBlock: ^(SKNode *node, BOOL *stop) {
-        if (node.position.x < 0 || node.position.x > _gameLayer.scene.size.width|| node.position.y < -((SKSpriteNode*)node).size.height){ // if item offscreen
+        if (node.position.x  < -((SKSpriteNode*)node).size.width || node.position.x > _gameLayer.scene.size.width +((SKSpriteNode*)node).size.width || node.position.y < -((SKSpriteNode*)node).size.height){ // if item offscreen
             [node removeFromParent]; // remove item from scene
             _itemsOnScreen--;
         }

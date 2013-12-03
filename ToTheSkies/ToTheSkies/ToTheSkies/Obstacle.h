@@ -13,6 +13,7 @@ typedef enum {
     ObstacleTypePlane
 } ObstacleType;
 
+static float const kSmogSlowFactor = -0.05;
 
 @interface Obstacle : GameObject
 
