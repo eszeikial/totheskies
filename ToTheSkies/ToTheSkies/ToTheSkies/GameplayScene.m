@@ -17,6 +17,7 @@
 #import "SoundBuddy.h"
 #import "CloudSpawner.h"
 #import "PickupSpawner.h"
+#import "ObstacleSpawner.h"
 
 
 @implementation GameplayScene{
@@ -27,6 +28,9 @@
     
     // clouds
     CloudSpawner *_cloudSpawner;
+    
+    // obstacles
+    ObstacleSpawner *_smogSpawner;
     
     // player
     Player *_player;
@@ -88,6 +92,8 @@
     _trampolineStrength = 1.4;
     _score = 0;
     self.backgroundColor = [SKColor colorWithRed:0.68 green:0.85 blue:0.98 alpha:1.0]; // #AEDAF9
+    
+    // add layers
     [self addChild:_gameplayLayer];
     [self addChild:_backgroundLayer];
     
@@ -108,6 +114,7 @@
     // --------- PICKUPS --------//
     
     _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:kMaxPickupsOnScreen delay:kPickupSpawnDelay];
+    _smogSpawner = [[ObstacleSpawner alloc] initWithObstalceType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 2 delay:kCloudSpawnDelay];
     
     //-------------trampoline-------------//
     
@@ -157,6 +164,7 @@
     {
         [_cloudSpawner update];
         [_pickupSpawner update];
+        [_smogSpawner update];
         
         // update the score label
         if(_player.position.y >= _height/2 && _player.physicsBody.velocity.dy > 0)

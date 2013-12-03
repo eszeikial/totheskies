@@ -53,7 +53,7 @@
         _timeLastSpawn = [NSDate date]; // reset time last spawned to RIGHT NAO
         _itemsOnScreen++;
     }
-    // remove off-screen items
+    // remove and move off-screen items
     [self despawn]; 
 
 }
@@ -83,6 +83,7 @@
         }
     }];
 }
+
 
 //-----------Object lost to collision---------//
 -(void)itemHit

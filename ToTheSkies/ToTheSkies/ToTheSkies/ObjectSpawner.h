@@ -14,6 +14,7 @@
 
 @property (strong,nonatomic) SKNode *gameLayer;
 
+
 - (id)initWithLayer: (SKNode*)layer
    maxItemsOnScreen: (int) maxItems
               delay: (double) spawnDelay;
