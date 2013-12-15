@@ -46,6 +46,8 @@
     BOOL _jetpackRight;
     BOOL _jetpackLeft;
     float _fuel;
+    float _fuelDcrAmt;
+    SKLabelNode *_fuelLabel;
     
     //Pickups
     PickupSpawner *_pickupSpawner;
@@ -157,6 +159,7 @@
     
     //---------------Jetpack--------------//
     _fuel = 100;
+    _fuelDcrAmt = .25;
     _jetpackLeft = false;
     _jetpackRight = false;
     
@@ -166,7 +169,10 @@
     _leftSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile: _leftPackPath];
     _rightSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile: _rightPackPath];
     
-    
+    _fuelLabel = [SKLabelNode labelNodeWithFontNamed:@"Noteworthy"];
+    _fuelLabel.fontSize = 32;
+    _fuelLabel.position = CGPointMake(self.size.width - 150, self.size.height - 50);
+    [self addChild:_fuelLabel];
 
     //-------------obstacles--------------//
     
@@ -216,18 +222,22 @@
         if(_jetpackRight)
         {
             _rightSmoke.position = _player.position;
-            _fuel -= .5;
+            _fuel -= _fuelDcrAmt;
             
             [_player.physicsBody applyForce:CGVectorMake(-100, 0)];
         }
         if(_jetpackLeft)
         {
             _leftSmoke.position = _player.position;
-            _fuel -= .5;
+            _fuel -= _fuelDcrAmt;
             
             [_player.physicsBody applyForce:CGVectorMake(100, 0)];
         }
-
+        
+        //Updating fuel label.
+        NSString *fuelLabelMessage = [NSString stringWithFormat:@"Fuel: %.2f",_fuel];
+        _fuelLabel.text = fuelLabelMessage;
+        
     }
 } // end update
 
