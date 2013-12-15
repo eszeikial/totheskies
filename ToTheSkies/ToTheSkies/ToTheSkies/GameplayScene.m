@@ -442,6 +442,39 @@
             _touch = touch; // Set it.
             _startPoint = CGPointMake(touchPoint.x, touchPoint.y);
             _trampExists = NO;
+            
+            
+            if(1024 - touchPoint.y > 400)
+            {
+                //Apply jetpack stuff
+                if(touchPoint.x > self.scene.size.width/2)//jetpack right
+                {
+                    if(_fuel > 0)
+                    {
+                        if(!_jetpackRight)
+                        {
+                            [self addChild:_rightSmoke];
+                            [_rightSmoke resetSimulation];
+                            _jetpackRight = YES;
+                        }
+                    }
+                }
+                else
+                {
+                    if(_fuel > 0)
+                    {
+                        if(!_jetpackLeft)
+                        {
+                            [self addChild:_leftSmoke];
+                            [_leftSmoke resetSimulation];
+                            _jetpackLeft = YES;
+                        }
+                        
+                        _leftSmoke.position = _player.position;
+                        _fuel -= .5;
+                    }
+                }
+            }
         }
     }
 }
@@ -474,35 +507,6 @@
                     //Show draw box.
                     _drawBoxShowTimes++;
                     [self displayTouchBox];
-                }
-                
-                //Apply jetpack stuff
-                if(touchPoint.x > self.scene.size.width/2)//jetpack right
-                {
-                    if(_fuel > 0)
-                    {
-                        if(!_jetpackRight)
-                        {
-                            [self addChild:_rightSmoke];
-                            [_rightSmoke resetSimulation];
-                            _jetpackRight = YES;
-                        }
-                    }
-                }
-                else
-                {
-                    if(_fuel > 0)
-                    {
-                        if(!_jetpackLeft)
-                        {
-                            [self addChild:_leftSmoke];
-                            [_leftSmoke resetSimulation];
-                            _jetpackLeft = YES;
-                        }
-                        
-                        _leftSmoke.position = _player.position;
-                        _fuel -= .5;
-                    }
                 }
                 
                 _touch = nil;
