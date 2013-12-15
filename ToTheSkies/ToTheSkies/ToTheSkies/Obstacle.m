@@ -54,7 +54,7 @@
         
         self.physicsBody.affectedByGravity = NO;
         self.physicsBody.contactTestBitMask = CategoryPlayerMask;
-        self.physicsBody.categoryBitMask = CategoryObstacleMask;
+        self.physicsBody.categoryBitMask = CategoryKillMask;
         self.physicsBody.collisionBitMask = 1; // shouldn't physically collide with things
     }
     return self;

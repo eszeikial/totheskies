@@ -24,5 +24,6 @@ static const double kCloudSpawnDelay = 3.0;
 -(void)pause;
 -(void)resume;
 -(void)updateScore: (float) points;
+-(void)endGame; 
 
 @end
