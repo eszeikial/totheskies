@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>maxPickUps</key>
+	<integer>5</integer>
+	<key>maxClouds</key>
+	<integer>8</integer>
+	<key>pickUpSpawnDelay</key>
+	<real>2</real>
+	<key>cloudSpawnDelay</key>
+	<real>3</real>
+</dict>
+</plist>

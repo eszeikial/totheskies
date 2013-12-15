@@ -8,10 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-static const int kMaxPickupsOnScreen = 5;
-static const int kMaxCloudsOnScreen = 8; 
-static const double kPickupSpawnDelay = 2.0;
-static const double kCloudSpawnDelay = 3.0; 
+static const NSString* kMaxPickupsOnScreen = @"maxPickUps";
+static const NSString* kMaxCloudsOnScreen = @"maxClouds";
+static const NSString* kPickupSpawnDelay = @"pickUpSpawnDelay";
+static const NSString* kCloudSpawnDelay = @"cloudSpawnDelay";
 
 @class Pickup;
 @class ViewController;
