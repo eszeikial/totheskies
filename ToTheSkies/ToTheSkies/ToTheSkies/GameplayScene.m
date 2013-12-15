@@ -39,7 +39,13 @@
     CGVector _playerStartVelocity;
     
     //JetPack stuff
-    CMMotionManager *_motionManager;
+    NSString *_leftPackPath;
+    NSString *_rightPackPath;
+    SKEmitterNode *_leftSmoke;
+    SKEmitterNode *_rightSmoke;
+    BOOL _jetpackRight;
+    BOOL _jetpackLeft;
+    float _fuel;
     
     //Pickups
     PickupSpawner *_pickupSpawner;
@@ -58,6 +64,7 @@
     float _trampolineStrength;
     
     SKSpriteNode *_drawBox;
+    int _drawBoxShowTimes;
     
     // Scene stuff
     float _height;
@@ -128,16 +135,24 @@
     
     _drawBox = [[SKSpriteNode alloc]initWithImageNamed:@"drawZone.png"];
     _drawBox.position = CGPointMake(_width/2, 200);
+    _drawBoxShowTimes = 0;
+    
     [self addChild:_drawBox];
     [self displayTouchBox];
     
-    //---------JetPack/CoreMotion---------//
+    //---------------Jetpack--------------//
+    _fuel = 100;
+    _jetpackLeft = false;
+    _jetpackRight = false;
     
-    _motionManager = [[CMMotionManager alloc] init];
-    _motionManager.accelerometerUpdateInterval = .2;
+    _leftPackPath = [[NSBundle mainBundle] pathForResource:@"jetpackParticleLeft" ofType:@"sks"];
+    _rightPackPath = [[NSBundle mainBundle] pathForResource:@"jetpackParticleRight" ofType:@"sks"];
     
-    [_motionManager startAccelerometerUpdates];
+    _leftSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile: _leftPackPath];
+    _rightSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile: _rightPackPath];
     
+    
+
     //-------------obstacles--------------//
     
     
@@ -164,6 +179,7 @@
 {
     if(!_paused)
     {
+        //spawner updates
         [_cloudSpawner update];
         [_pickupSpawner update];
         [_smogSpawner update];
@@ -180,6 +196,23 @@
         {
             [self endGame];
         }
+        
+        //Particle updates
+        if(_jetpackRight)
+        {
+            _rightSmoke.position = _player.position;
+            _fuel -= .5;
+            
+            [_player.physicsBody applyForce:CGVectorMake(-100, 0)];
+        }
+        if(_jetpackLeft)
+        {
+            _leftSmoke.position = _player.position;
+            _fuel -= .5;
+            
+            [_player.physicsBody applyForce:CGVectorMake(100, 0)];
+        }
+
     }
 } // end update
 
@@ -414,9 +447,45 @@
             //Out of touch box!
             if(1024 - touchPoint.y > 400)
             {
-                //Show draw box.
-                [self displayTouchBox];
-                _touch = Nil;
+                if(_drawBoxShowTimes < 3)
+                {
+                    //Show draw box.
+                    _drawBoxShowTimes++;
+                    [self displayTouchBox];
+                }
+                
+                //Apply jetpack stuff
+                if(touchPoint.x > self.scene.size.width/2)//jetpack right
+                {
+                    //if(_fuel > 0)
+                    {
+                        if(!_jetpackRight)
+                        {
+                            [self addChild:_rightSmoke];
+                            [_rightSmoke resetSimulation];
+                            _jetpackRight = YES;
+                        }
+                    }
+                }
+                else
+                {
+                    //if(_fuel > 0)
+                    {
+                        if(!_jetpackLeft)
+                        {
+                            [self addChild:_leftSmoke];
+                            [_leftSmoke resetSimulation];
+                            _jetpackLeft = YES;
+                        }
+                        
+                        _leftSmoke.position = _player.position;
+                        _fuel -= .5;
+                    }
+                }
+                
+                _touch = nil;
+                _trampExists = NO;
+                _trampoline.path = NULL;
             }
         }
     }
@@ -434,6 +503,17 @@
     {
         _trampExists = NO;
         _trampoline.path = NULL;
+    }
+    
+    if(_jetpackLeft)
+    {
+        [_leftSmoke removeFromParent];
+        _jetpackLeft = NO;
+    }
+    else if(_jetpackRight)
+    {
+        [_rightSmoke removeFromParent];
+        _jetpackRight = NO;
     }
     
     _touch = nil;
