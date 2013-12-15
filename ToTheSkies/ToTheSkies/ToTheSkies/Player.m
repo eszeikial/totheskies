@@ -56,7 +56,7 @@ static NSString *const kImageFileName = @"character.png";
                  [(GameplayScene*)self.scene updateScore:((Pickup*) collisionObject).points];
              }
              else {
-                 NSLog(@"Add fuel");
+                 [(GameplayScene*)self.scene addFuel];
              }
              
              break;

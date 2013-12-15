@@ -24,6 +24,7 @@ static const NSString* kCloudSpawnDelay = @"cloudSpawnDelay";
 -(void)pause;
 -(void)resume;
 -(void)updateScore: (float) points;
--(void)endGame; 
+-(void)endGame;
+-(void)addFuel;
 
 @end

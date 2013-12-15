@@ -221,17 +221,27 @@
         //Particle updates
         if(_jetpackRight)
         {
-            _rightSmoke.position = _player.position;
-            _fuel -= _fuelDcrAmt;
+            if(_fuel > 0)
+            {
+                _rightSmoke.position = _player.position;
+                _fuel -= _fuelDcrAmt;
             
-            [_player.physicsBody applyForce:CGVectorMake(-100, 0)];
+                [_player.physicsBody applyForce:CGVectorMake(-100, 0)];
+            }
+            else
+                _jetpackRight = NO;
         }
         if(_jetpackLeft)
         {
-            _leftSmoke.position = _player.position;
-            _fuel -= _fuelDcrAmt;
+            if(_fuel > 0)
+            {
+                _leftSmoke.position = _player.position;
+                _fuel -= _fuelDcrAmt;
             
-            [_player.physicsBody applyForce:CGVectorMake(100, 0)];
+                [_player.physicsBody applyForce:CGVectorMake(100, 0)];
+            }
+            else
+                _jetpackLeft = NO;
         }
         
         //Updating fuel label.
@@ -482,7 +492,7 @@
                 //Apply jetpack stuff
                 if(touchPoint.x > self.scene.size.width/2)//jetpack right
                 {
-                    //if(_fuel > 0)
+                    if(_fuel > 0)
                     {
                         if(!_jetpackRight)
                         {
@@ -494,7 +504,7 @@
                 }
                 else
                 {
-                    //if(_fuel > 0)
+                    if(_fuel > 0)
                     {
                         if(!_jetpackLeft)
                         {
@@ -571,6 +581,11 @@
 {
     self.view.paused = NO;
     _paused = NO;
+}
+
+-(void)addFuel
+{
+    _fuel += 25;
 }
 
 -(void)endGame{
