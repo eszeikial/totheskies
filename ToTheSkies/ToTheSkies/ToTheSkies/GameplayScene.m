@@ -477,6 +477,14 @@
                                                    delegate: self
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
+    
+    // get rid of obstacles 
+    for (SKNode *s in _gameplayLayer.children){
+        if ([s.name isEqualToString:@"planeright"] || [s.name isEqualToString:@"planeleft"] || [s.name isEqualToString:@"pickup"]){
+            [s removeFromParent];
+        }
+    }
+    
     [alert show];
 
 }
