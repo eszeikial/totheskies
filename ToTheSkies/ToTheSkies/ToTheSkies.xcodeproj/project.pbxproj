@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3F16FE2C185E1DC50041F0BC /* planeleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE2A185E1DC50041F0BC /* planeleft.png */; };
 		3F16FE2D185E1DC50041F0BC /* planeright.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE2B185E1DC50041F0BC /* planeright.png */; };
+		3F16FE30185E2B7A0041F0BC /* jetpackParticleRight.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE2E185E2B7A0041F0BC /* jetpackParticleRight.sks */; };
+		3F16FE31185E2B7A0041F0BC /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE2F185E2B7A0041F0BC /* spark.png */; };
+		3F16FE33185E2D620041F0BC /* jetpackParticleLeft.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE32185E2D620041F0BC /* jetpackParticleLeft.sks */; };
 		3F1953BA1832AFC800BB093C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1953B91832AFC800BB093C /* Foundation.framework */; };
 		3F1953BC1832AFC800BB093C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1953BB1832AFC800BB093C /* CoreGraphics.framework */; };
 		3F1953BE1832AFC800BB093C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1953BD1832AFC800BB093C /* UIKit.framework */; };
@@ -70,6 +73,9 @@
 /* Begin PBXFileReference section */
 		3F16FE2A185E1DC50041F0BC /* planeleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planeleft.png; sourceTree = "<group>"; };
 		3F16FE2B185E1DC50041F0BC /* planeright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planeright.png; sourceTree = "<group>"; };
+		3F16FE2E185E2B7A0041F0BC /* jetpackParticleRight.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jetpackParticleRight.sks; sourceTree = "<group>"; };
+		3F16FE2F185E2B7A0041F0BC /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		3F16FE32185E2D620041F0BC /* jetpackParticleLeft.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = jetpackParticleLeft.sks; sourceTree = "<group>"; };
 		3F1953B61832AFC800BB093C /* ToTheSkies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToTheSkies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1953B91832AFC800BB093C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F1953BB1832AFC800BB093C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -247,6 +253,9 @@
 		3F38557A1833E0B7005E550D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3F16FE2E185E2B7A0041F0BC /* jetpackParticleRight.sks */,
+				3F16FE32185E2D620041F0BC /* jetpackParticleLeft.sks */,
+				3F16FE2F185E2B7A0041F0BC /* spark.png */,
 				3F463C961835113D00E1D4AB /* sounds */,
 				3F38557B1833E0C6005E550D /* images */,
 			);
@@ -408,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F16FE30185E2B7A0041F0BC /* jetpackParticleRight.sks in Resources */,
 				3FA8E81618355EA600DB5EE6 /* cloud.png in Resources */,
 				3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */,
 				3F1C31421845695C00320886 /* purpleballoon.png in Resources */,
@@ -418,8 +428,10 @@
 				3F38557E1833E0F9005E550D /* character.png in Resources */,
 				3F1C31431845695C00320886 /* yellowballoon.png in Resources */,
 				3FC568861835077700373F21 /* SoaringHigh.mp3 in Resources */,
+				3F16FE31185E2B7A0041F0BC /* spark.png in Resources */,
 				3F1953C41832AFC800BB093C /* InfoPlist.strings in Resources */,
 				3F1C31311845621500320886 /* blueballoon.png in Resources */,
+				3F16FE33185E2D620041F0BC /* jetpackParticleLeft.sks in Resources */,
 				3F1953CD1832AFC800BB093C /* Main.storyboard in Resources */,
 				3F3BA26A184009EC00E4BAAF /* drawZone.png in Resources */,
 				3F49994F184E35E10070CFE3 /* plane.png in Resources */,
