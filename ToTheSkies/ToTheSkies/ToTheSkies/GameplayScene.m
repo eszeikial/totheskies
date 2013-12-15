@@ -190,7 +190,7 @@
     }
 } // end update
 
--(void)updateScore: (int) points
+-(void)updateScore: (float) points
 {
     _score += points;
     [self updateScoreLabel];
@@ -203,6 +203,7 @@
     if((int)_score > _highScore)
     {
         _highScore = (int)_score;
+        _highScoreLabel.text = [[NSString alloc]initWithFormat:@"High Score: %i", (int)_highScore];
     }
 }
 
