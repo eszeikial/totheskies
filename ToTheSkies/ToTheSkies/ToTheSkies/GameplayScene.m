@@ -178,14 +178,7 @@
         // check if player went off the screen
         if(_player.position.y < 0)
         {
-            [self pause];
-            
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
-                                                message: @"Play again?"
-                                               delegate: self
-                                      cancelButtonTitle: @"OK"
-                                      otherButtonTitles: nil];
-            [alert show];
+            [self endGame];
         }
     }
 } // end update
@@ -475,5 +468,17 @@
     _paused = NO;
 }
 
+-(void)endGame{
+    
+    [self pause];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
+                                                    message: @"Play again?"
+                                                   delegate: self
+                                          cancelButtonTitle: @"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+
+}
 
 @end
