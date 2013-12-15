@@ -21,7 +21,7 @@ static const NSString* kCloudSpawnDelay = @"cloudSpawnDelay";
 @interface GameplayScene : SKScene <SKPhysicsContactDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak)ViewController *viewController;
-@property (nonatomic, weak)SoundBuddy *soundBuddy;
+@property (nonatomic, strong)SoundBuddy *soundBuddy;
 
 -(void)pause;
 -(void)resume;
