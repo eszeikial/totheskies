@@ -26,7 +26,7 @@ static NSString *const kImageFileName = @"character.png";
     if (self) {
         self.name = @"player";
         self.physicsBody.categoryBitMask = CategoryPlayerMask;
-        self.physicsBody.contactTestBitMask = CategoryPickupMask | CategoryObstacleMask | CategoryKillMask | CategorySmogMask;// what contact to test for?
+        self.physicsBody.contactTestBitMask = CategoryPickupMask | CategoryObstacleMask | CategorySmogMask;// what contact to test for?
         self.physicsBody.collisionBitMask = CategoryObstacleMask; // what can the player physically collide with?
         self.position = point;
     }
@@ -44,11 +44,6 @@ static NSString *const kImageFileName = @"character.png";
          case CategoryObstacleMask:
              
              break;
-        
-         case CategoryKillMask:
-             [(GameplayScene *)self.scene endGame];
-             break;
-             
          case CategoryPickupMask:
              [collisionObject removeFromParent];
              //[self addPoints:((Pickup*) collisionObject).points];

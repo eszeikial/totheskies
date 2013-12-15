@@ -7,17 +7,11 @@
 //
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 
 #ifndef ToTheSkies_Helper_h
 #define ToTheSkies_Helper_h
 
-typedef struct {
-    float x, y;
-}cPoint;
-
 int randInRange(int lowerBound, int upperBound);
-float calcDistance(cPoint start, cPoint end, cPoint playerPosition, float height);
 
 #endif
 

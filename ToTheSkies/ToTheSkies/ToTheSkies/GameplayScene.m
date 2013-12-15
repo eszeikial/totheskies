@@ -18,7 +18,6 @@
 #import "CloudSpawner.h"
 #import "PickupSpawner.h"
 #import "ObstacleSpawner.h"
-#import "Helper.h"
 
 
 @implementation GameplayScene{
@@ -179,9 +178,14 @@
         // check if player went off the screen
         if(_player.position.y < 0)
         {
-
+            [self pause];
             
-            [self endGame];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
+                                                message: @"Play again?"
+                                               delegate: self
+                                      cancelButtonTitle: @"OK"
+                                      otherButtonTitles: nil];
+            [alert show];
         }
     }
 } // end update
@@ -310,10 +314,23 @@
     if(!_trampExists)
         return NO;
     
-    cPoint startPoint = {(float)(_startPoint.x), (float)(_startPoint.y)};
-    cPoint endPoint = {(float)(_endPoint.x), (float)(_endPoint.y)};
-    cPoint playerPosition = {(float)(_player.position.x), (float)(_player.position.y)};
-    float distance = calcDistance(startPoint, endPoint, playerPosition, _height);
+    
+    /* Getting general form from two points.
+     a = y1-y2,
+     b = x2-x1,
+     c = (x1-x2)*y1 + (y2-y1)*x1
+     */
+    
+    float a = _startPoint.y - _endPoint.y;
+    float b = _endPoint.x - _startPoint.x;
+    float c = (_startPoint.x-_endPoint.x)* _startPoint.y + (_endPoint.y-_startPoint.y) * _startPoint.x;
+    
+    float x = _player.position.x;
+    float y = -_player.position.y+_height;
+    
+    
+    // Using general form to calculate distance
+    float distance = (fabsf(a*x+b*y+c))/(sqrtf(a*a+b*b));
     
     //Pretty close.
     if(distance < 30)
@@ -471,17 +488,5 @@
     _paused = NO;
 }
 
-
--(void)endGame{
-    
-    [self pause];
-    
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
-                                                    message: @"Play again?"
-                                                   delegate: self
-                                          cancelButtonTitle: @"OK"
-                                          otherButtonTitles: nil];
-    [alert show];
-}
 
 @end
