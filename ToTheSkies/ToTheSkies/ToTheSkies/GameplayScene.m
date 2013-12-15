@@ -52,9 +52,6 @@
     //Pickups
     PickupSpawner *_pickupSpawner;
     
-    // Sound Buddy
-    SoundBuddy* soundBuddy;
-    
     // Game data plist
     NSDictionary* _gameData;
     
@@ -126,9 +123,8 @@
     [self addChild:_backgroundLayer];
     
     //--------------Sound Buddy-----------//
-    soundBuddy = [[SoundBuddy alloc] init];
-    [soundBuddy setUp];
-    [soundBuddy playBackgroundMusic];
+    [_soundBuddy setUp];
+    [_soundBuddy playBackgroundMusic];
     
     //--------------Player----------------//
     _playerStartPoint = CGPointMake(self.view.center.x, 800);
@@ -337,7 +333,7 @@
             }
             
             
-            [soundBuddy playJumpSound];
+            [_soundBuddy playJumpSound];
             _player.physicsBody.velocity = CGVectorMake(vx, vy);
         }
     }
@@ -429,15 +425,6 @@
     if([objectGameObj isKindOfClass:[Pickup class]])
     {
         [_pickupSpawner itemHit]; // So the spawner can keep track of objects on screen.
-    }
-    
-    
-    
-    // this is bad code but we will fix it for the next deliverable when we have more pickups implemented
-    // we will ultimately be moving soundBuddy into the player
-    if([objectGameObj.name isEqual: @"pickup"])
-    {
-        [soundBuddy playPopSound];
     }
     
 }
@@ -605,8 +592,13 @@
         }
     }
     
+    // reset fuel
+    _fuel = 100.0;
+    
+    // show message
+    
     [alert show];
-
 }
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SoundBuddy.h"
 
 static const NSString* kMaxPickupsOnScreen = @"maxPickUps";
 static const NSString* kMaxCloudsOnScreen = @"maxClouds";
@@ -20,6 +21,7 @@ static const NSString* kCloudSpawnDelay = @"cloudSpawnDelay";
 @interface GameplayScene : SKScene <SKPhysicsContactDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak)ViewController *viewController;
+@property (nonatomic, weak)SoundBuddy *soundBuddy;
 
 -(void)pause;
 -(void)resume;

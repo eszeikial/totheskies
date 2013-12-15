@@ -47,12 +47,14 @@ static NSString *const kImageFileName = @"character.png";
              
              
          case CategoryKillMask:
+             [((GameplayScene*)self.scene).soundBuddy playPlaneSound];
              [(GameplayScene*)self.scene endGame];
              break;
              
          case CategoryPickupMask:
              [collisionObject removeFromParent];
              if (((Pickup *)collisionObject).pType == PickupTypeBalloon){
+                 [((GameplayScene*)self.scene).soundBuddy playPopSound];
                  [(GameplayScene*)self.scene updateScore:((Pickup*) collisionObject).points];
              }
              else {

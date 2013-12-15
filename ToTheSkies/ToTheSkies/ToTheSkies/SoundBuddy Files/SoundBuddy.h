@@ -13,6 +13,8 @@
 -(void)playJumpSound;
 -(void)playPopSound;
 -(void)playBackgroundMusic;
+-(void)playRocketSound;
+-(void)playPlaneSound;
 -(void)setUp;
 
 @end

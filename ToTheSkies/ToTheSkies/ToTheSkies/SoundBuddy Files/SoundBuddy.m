@@ -13,6 +13,8 @@
 static NSString* const kBGMusic = @"SoaringHigh";
 static NSString* const kJumpSound = @"jumpSound";
 static NSString* const kPopSound = @"BalloonPop";
+static NSString* const kRocketSound = @"rocketThrust";
+static NSString* const kPlaneSound = @"planeCrash";
 
 @implementation SoundBuddy{
     NSMutableDictionary *_dict;
@@ -32,6 +34,8 @@ static NSString* const kPopSound = @"BalloonPop";
     [self createChannel:kBGMusic];
     [self createChannel:kJumpSound];
     [self createChannel:kPopSound];
+    [self createChannel:kRocketSound];
+    [self createChannel:kPlaneSound];
     [self preloadAllSounds];
 }
 
@@ -96,5 +100,16 @@ static NSString* const kPopSound = @"BalloonPop";
     [self playSound:kBGMusic];
     //[self performSelector:@selector(playSound:) withObject: kBGMusic afterDelay:0.35];
 }
+
+-(void)playRocketSound {
+    _volume = 0.5;
+    [self playSound:kRocketSound];
+}
+
+-(void)playPlaneSound {
+    _volume = 0.5;
+    [self playSound:kPlaneSound];
+}
+
 
 @end
