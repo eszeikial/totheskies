@@ -123,6 +123,7 @@
     [self addChild:_backgroundLayer];
     
     //--------------Sound Buddy-----------//
+    _soundBuddy = [[SoundBuddy alloc] init];
     [_soundBuddy setUp];
     [_soundBuddy playBackgroundMusic];
     
