@@ -11,12 +11,12 @@
 @implementation Obstacle
 
 
-- (id)initWithObstacleType:(ObstacleType)obstacleType{
+- (id)initWithObstacleType:(ObstacleType)obstacleType :(int)planeType{
     
     switch(obstacleType)
     {
         case ObstacleTypeSmog: self = [self initSmogCloud]; break;
-        case ObstacleTypePlane: self = [self initPlane]; break;
+        case ObstacleTypePlane: self = [self initPlane:planeType]; break;
     }
     
     if (self) {
@@ -40,15 +40,21 @@
     return self;
 }
 
-- (id)initPlane{
+- (id)initPlane: (int)planeType{
+    if(planeType == 0)
+        self = [super initWithImageNamed:@"planeright.png" andScaleFactor:.5];
+    else
+        self = [super initWithImageNamed:@"planeleft.png" andScaleFactor:.5];
     
-    self = [super initWithImageNamed:@"plane.png" andScaleFactor:1.0];
-        NSLog(@"created");
     if (self) {
-        self.name = @"plane";
+        if(planeType == 0)
+            self.name = @"planeright";
+        else
+            self.name = @"planeleft";
+        
         self.physicsBody.affectedByGravity = NO;
         self.physicsBody.contactTestBitMask = CategoryPlayerMask;
-        self.physicsBody.categoryBitMask = CategoryObstacleMask;
+        self.physicsBody.categoryBitMask = CategoryKillMask;
         self.physicsBody.collisionBitMask = 1; // shouldn't physically collide with things
     }
     return self;

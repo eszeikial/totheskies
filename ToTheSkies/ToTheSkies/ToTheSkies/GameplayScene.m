@@ -178,19 +178,14 @@
         // check if player went off the screen
         if(_player.position.y < 0)
         {
-            [self pause];
+
             
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
-                                                message: @"Play again?"
-                                               delegate: self
-                                      cancelButtonTitle: @"OK"
-                                      otherButtonTitles: nil];
-            [alert show];
+            [self endGame];
         }
     }
 } // end update
 
--(void)updateScore: (int) points
+-(void)updateScore: (float) points
 {
     _score += points;
     [self updateScoreLabel];
@@ -203,6 +198,7 @@
     if((int)_score > _highScore)
     {
         _highScore = (int)_score;
+        _highScoreLabel.text = [[NSString alloc]initWithFormat:@"High Score: %i", (int)_highScore];
     }
 }
 
@@ -487,5 +483,17 @@
     _paused = NO;
 }
 
+
+-(void)endGame{
+    
+    [self pause];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Game Over"
+                                                    message: @"Play again?"
+                                                   delegate: self
+                                          cancelButtonTitle: @"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+}
 
 @end

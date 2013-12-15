@@ -29,14 +29,19 @@
 }
 
 -(Obstacle*)spawn{
-    Obstacle *newObstacle = [[Obstacle alloc] initWithObstacleType:_oType];
+   
+    int planeType = arc4random() % 2;
+    Obstacle *newObstacle = [[Obstacle alloc] initWithObstacleType:_oType :planeType];
     
     switch (_oType) {
         case ObstacleTypeSmog:
             newObstacle.position = CGPointMake(randInRange(0, self.gameLayer.scene.size.width), self.gameLayer.scene.size.height + newObstacle.size.height);
             break;
         case ObstacleTypePlane:
-            newObstacle.position = CGPointMake(0 - newObstacle.size.width, randInRange(0, self.gameLayer.scene.size.height));
+            if(planeType == 0) // Plane Right
+                newObstacle.position = CGPointMake(0 - newObstacle.size.width, randInRange(0, self.gameLayer.scene.size.height));
+            else
+                newObstacle.position = CGPointMake(self.gameLayer.scene.size.width + newObstacle.size.width, randInRange(0, self.gameLayer.scene.size.height));
             break;
         default:
             break;
@@ -52,7 +57,8 @@
             [self despawnWithName:@"smog"];
             break;
         case ObstacleTypePlane:
-             [self despawnWithName:@"plane"];
+            [self despawnWithName:@"planeright"];
+            [self despawnWithName:@"planeleft"];
         default:
             break;
     }
@@ -68,7 +74,10 @@
             [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen items
             break;
         case ObstacleTypePlane:
-            [node setPosition:CGPointMake(node.position.x + 3, node.position.y)]; //move on-screen items
+            if([node.name isEqualToString:@"planeright"])
+                [node setPosition:CGPointMake(node.position.x + 3, node.position.y)]; //move on-screen items
+            else
+                [node setPosition:CGPointMake(node.position.x - 3, node.position.y)]; //move on-screen items
             break;
         default:
             break;

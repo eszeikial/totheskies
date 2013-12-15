@@ -19,6 +19,6 @@ static float const kSmogSlowFactor = -0.05;
 
 @property (nonatomic, assign) ObstacleType oType;
 
-- (id)initWithObstacleType: (ObstacleType) obstacleType;
+- (id)initWithObstacleType: (ObstacleType) obstacleType :(int) planeType;
 
 @end
