@@ -29,7 +29,7 @@
 
 -(UILabel*)createLabel
 {
-    _label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 200, 0, 300, 700)];
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 130, 0, 300, 700)];
     _label.backgroundColor = [UIColor clearColor];
     _label.textColor= [UIColor whiteColor];
     _label.lineBreakMode = NSLineBreakByWordWrapping;

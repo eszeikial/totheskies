@@ -29,12 +29,12 @@
 
 -(UILabel*)createLabel
 {
-    _label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 200, 0, 300, 700)];
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 130, 80, 300, 700)];
     _label.backgroundColor = [UIColor clearColor];
     _label.textColor= [UIColor whiteColor];
     _label.lineBreakMode = NSLineBreakByWordWrapping;
     _label.numberOfLines = 0;
-    _label.text = @"Instructions:\n\nUse your finger to draw a trampoline under the character! \n\nColliding with objects will have various effects.";
+    _label.text = @"Instructions:\n\nUse your finger to draw a trampoline under the character!\n\nColliding with objects will have various positive and negative effects.\n\nDifferent colored balloons award different amounts of points.\n\nAscending higher will also award points!";
     _label.font = [UIFont boldSystemFontOfSize:30];
     
     return _label;
@@ -48,7 +48,7 @@
      forControlEvents:UIControlEventTouchDown];
     [goBackButton setTitle:@"Go Back" forState:UIControlStateNormal];
     
-    goBackButton.frame = CGRectMake(300, 800, 160.0, 40.0);
+    goBackButton.frame = CGRectMake(300, 840, 160.0, 40.0);
     goBackButton.titleLabel.font = [UIFont boldSystemFontOfSize:40];
     
     return goBackButton;

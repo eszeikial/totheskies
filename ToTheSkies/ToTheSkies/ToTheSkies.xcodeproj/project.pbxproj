@@ -38,6 +38,8 @@
 		3F38557E1833E0F9005E550D /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F38557C1833E0F9005E550D /* character.png */; };
 		3F3855821833E6F4005E550D /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3855811833E6F4005E550D /* GameObject.m */; };
 		3F3BA26A184009EC00E4BAAF /* drawZone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3BA269184009EC00E4BAAF /* drawZone.png */; };
+		3F437883185E3AEB0034B32F /* hotairballoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F437881185E3AEB0034B32F /* hotairballoon.png */; };
+		3F437884185E3AEB0034B32F /* oil.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F437882185E3AEB0034B32F /* oil.png */; };
 		3F49994A184E2F9E0070CFE3 /* smogcloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F499949184E2F9E0070CFE3 /* smogcloud.png */; };
 		3F49994D184E304C0070CFE3 /* Obstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49994C184E304C0070CFE3 /* Obstacle.m */; };
 		3F49994F184E35E10070CFE3 /* plane.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F49994E184E35E10070CFE3 /* plane.png */; };
@@ -109,6 +111,8 @@
 		3F3855801833E6F4005E550D /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		3F3855811833E6F4005E550D /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		3F3BA269184009EC00E4BAAF /* drawZone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drawZone.png; sourceTree = "<group>"; };
+		3F437881185E3AEB0034B32F /* hotairballoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotairballoon.png; sourceTree = "<group>"; };
+		3F437882185E3AEB0034B32F /* oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oil.png; sourceTree = "<group>"; };
 		3F499949184E2F9E0070CFE3 /* smogcloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smogcloud.png; sourceTree = "<group>"; };
 		3F49994B184E304C0070CFE3 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		3F49994C184E304C0070CFE3 /* Obstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Obstacle.m; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 		3F38557B1833E0C6005E550D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3F437881185E3AEB0034B32F /* hotairballoon.png */,
+				3F437882185E3AEB0034B32F /* oil.png */,
 				3F16FE2A185E1DC50041F0BC /* planeleft.png */,
 				3F16FE2B185E1DC50041F0BC /* planeright.png */,
 				3F49994E184E35E10070CFE3 /* plane.png */,
@@ -419,7 +425,9 @@
 			files = (
 				3F16FE30185E2B7A0041F0BC /* jetpackParticleRight.sks in Resources */,
 				3FA8E81618355EA600DB5EE6 /* cloud.png in Resources */,
+				3F437883185E3AEB0034B32F /* hotairballoon.png in Resources */,
 				3FC5688B1835080700373F21 /* BalloonPop.wav in Resources */,
+				3F437884185E3AEB0034B32F /* oil.png in Resources */,
 				3F1C31421845695C00320886 /* purpleballoon.png in Resources */,
 				3FC568851835077700373F21 /* jumpSound.wav in Resources */,
 				3F49994A184E2F9E0070CFE3 /* smogcloud.png in Resources */,
