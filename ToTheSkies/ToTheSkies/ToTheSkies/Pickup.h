@@ -12,7 +12,7 @@
 typedef enum {
     PickupTypeBalloon = 1,
     PickupTypeFuel = 2,
-    PickupTypeRing = 3
+    //PickupTypeRing = 3
 } PickupType;
 
 typedef enum {

@@ -52,8 +52,13 @@ static NSString *const kImageFileName = @"character.png";
              
          case CategoryPickupMask:
              [collisionObject removeFromParent];
-             //[self addPoints:((Pickup*) collisionObject).points];
-             [(GameplayScene*)self.scene updateScore:((Pickup*) collisionObject).points];
+             if (((Pickup *)collisionObject).pType == PickupTypeBalloon){
+                 [(GameplayScene*)self.scene updateScore:((Pickup*) collisionObject).points];
+             }
+             else {
+                 NSLog(@"Add fuel");
+             }
+             
              break;
      
          default:
