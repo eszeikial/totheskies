@@ -53,6 +53,9 @@
     // Sound Buddy
     SoundBuddy* soundBuddy;
     
+    // Game data plist
+    NSDictionary* _gameData;
+    
     //Trampoline - drawing
     UITouch *_touch;
     SKShapeNode *_trampoline;
@@ -69,6 +72,10 @@
     // Scene stuff
     float _height;
     float _width;
+    int _maxPickupsOnScreen;
+    int _maxCloudsOnScreen;
+    double _pickupSpawnDelay;
+    double _cloudSpawnDelay;
     
     // Scoring
     SKLabelNode* _highScoreLabel;
@@ -89,6 +96,17 @@
     _gameplayLayer.zPosition = 0;
     _gameplayLayer.zPosition = 1;
     
+    // set the pList as our game data
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"GameData" ofType:@"plist"];
+    _gameData = [[NSDictionary alloc] initWithContentsOfFile: path];
+    
+    // get constants
+    _pickupSpawnDelay = (double)[_gameData[kPickupSpawnDelay] doubleValue];
+    _cloudSpawnDelay = (double)[_gameData[kCloudSpawnDelay] doubleValue];
+    _maxPickupsOnScreen = (int)[_gameData[kMaxPickupsOnScreen] integerValue];
+    _maxCloudsOnScreen = (int)[_gameData[kMaxCloudsOnScreen] integerValue];
+
+    
     //-------------Misc Setup-------------//
     [self.physicsWorld setGravity:CGVectorMake(0, -1.0)]; // #ZACH  this is to make things easier to test for collisions. Change it to something else if you like.
     
@@ -105,9 +123,6 @@
     [self addChild:_gameplayLayer];
     [self addChild:_backgroundLayer];
     
-    // by default, not paused
-
-    
     //--------------Sound Buddy-----------//
     soundBuddy = [[SoundBuddy alloc] init];
     [soundBuddy setUp];
@@ -121,9 +136,9 @@
     
     // --------- PICKUPS --------//
     
-    _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:kMaxPickupsOnScreen delay:kPickupSpawnDelay];
-    _smogSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:kMaxCloudsOnScreen / 4 delay:kCloudSpawnDelay * 4];
-    _planeSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypePlane Layer:_gameplayLayer maxItemsOnScreen:1 delay:kCloudSpawnDelay * 4];
+    _pickupSpawner = [[PickupSpawner alloc] initWithLayer:_gameplayLayer maxItemsOnScreen:_maxPickupsOnScreen delay:_pickupSpawnDelay];
+    _smogSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypeSmog Layer:_gameplayLayer maxItemsOnScreen:_maxCloudsOnScreen / 4 delay:_cloudSpawnDelay * 4];
+    _planeSpawner = [[ObstacleSpawner alloc] initWithObstacleType:ObstacleTypePlane Layer:_gameplayLayer maxItemsOnScreen:1 delay:_cloudSpawnDelay * 4];
     
     //-------------trampoline-------------//
     
@@ -158,7 +173,7 @@
     
     
     // ------------- clouds ------------ //
-    _cloudSpawner = [[CloudSpawner alloc] initWithLayer:_backgroundLayer maxItemsOnScreen:kMaxCloudsOnScreen delay:kCloudSpawnDelay];
+    _cloudSpawner = [[CloudSpawner alloc] initWithLayer:_backgroundLayer maxItemsOnScreen:_maxCloudsOnScreen delay:_cloudSpawnDelay];
     
     
     // ------------- add stuff to layers -------------- //
