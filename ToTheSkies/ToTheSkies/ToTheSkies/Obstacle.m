@@ -5,12 +5,13 @@
 //  Created by Student on 12/3/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  A game object that has a negative effect when the player collides with it
 
 #import "Obstacle.h"
 
 @implementation Obstacle
 
-
+// Initialize as a specfic type of obstacles
 - (id)initWithObstacleType:(ObstacleType)obstacleType :(int)planeType{
     
     switch(obstacleType)
@@ -25,6 +26,7 @@
     return self;
 }
 
+// Initialize as a smog cloud
 - (id)initSmogCloud{
     
     self = [super initWithImageNamed:@"smogcloud.png" andScaleFactor:1.0];
@@ -40,6 +42,7 @@
     return self;
 }
 
+// Initialize as a plane
 - (id)initPlane: (int)planeType{
     if(planeType == 0)
         self = [super initWithImageNamed:@"planeright.png" andScaleFactor:.5];

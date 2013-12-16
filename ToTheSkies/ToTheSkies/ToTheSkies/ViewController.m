@@ -22,6 +22,7 @@
     [super viewDidLoad];
 }
 
+// spriteview lazy loader
 -(SKView *)spriteView
 {
     if (!_spriteView){
@@ -35,6 +36,7 @@
     return _spriteView;
 }
 
+// title screen lazy loader
 - (TitleScene*)titleScene
 {
     if (!_titleScene) {
@@ -46,6 +48,7 @@
     return _titleScene;
 }
 
+// credits screen lazy loader
 - (CreditsScene*)creditsScene
 {
     if (!_creditsScene) {
@@ -57,6 +60,7 @@
     return _creditsScene;
 }
 
+// instruction screen lazy loader
 - (InstructionScene*)instructionScene
 {
     if (!_instructionScene) {
@@ -67,6 +71,8 @@
     }
     return _instructionScene;
 }
+
+// game screen lazy loader
 - (GameplayScene*)gameScene
 {
     if (!_gameScene) {
@@ -78,7 +84,7 @@
     return _gameScene;
 }
 
-
+// When the user clicks game start, transition to game screen
 - (IBAction)clickedStartGameButton
 {
     NSLog(@"%s",__FUNCTION__);
@@ -86,6 +92,7 @@
     [self.spriteView presentScene: self.gameScene];
 }
 
+// When the user clicks instructions, transition to instruction screen
 - (IBAction)clickedInstructionsButton
 {
     NSLog(@"%s",__FUNCTION__);
@@ -93,6 +100,7 @@
     [self.spriteView presentScene: self.instructionScene];
 }
 
+// When the user clicks credits button, transition to credits screen
 - (IBAction)clickedCreditsButton
 {
     NSLog(@"%s",__FUNCTION__);
@@ -100,6 +108,7 @@
     [self.spriteView presentScene: self.creditsScene];
 }
 
+// When the user clicks go back, transition back to the title screen
 - (void)clickedGoBackButton
 {
     NSLog(@"%s",__FUNCTION__);
@@ -107,6 +116,7 @@
     [self.spriteView presentScene: self.titleScene];
 }
 
+// Used to hide non-spritekit UI elements
 - (void)hideUIElements:(BOOL)shouldHide
 {
     CGFloat alpha = shouldHide ? 0.0f : 1.0f;
@@ -121,16 +131,19 @@
     } completion:NULL];
 }
 
+// Pause the game, used by app delegate
 -(void)pauseGame
 {
     [_gameScene pause];
 }
 
+// Resume the game, used by app delegate
 -(void)resumeGame
 {
     [_gameScene resume];
 }
 
+// Start off using the title scene
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.spriteView presentScene:self.titleScene];

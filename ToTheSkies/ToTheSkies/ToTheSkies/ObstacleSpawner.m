@@ -5,6 +5,7 @@
 //  Created by Student on 12/3/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  An object spawner specifically for negative collidables known as obstacles
 
 #import "ObstacleSpawner.h"
 #import "Obstacle.h"
@@ -15,6 +16,7 @@
     ObstacleType _oType;
 }
 
+// Initializer
 - (id)initWithObstacleType: (ObstacleType) oType
                      Layer: (SKNode*)layer
           maxItemsOnScreen: (int) maxItems
@@ -28,6 +30,7 @@
     return self;
 }
 
+// Spawn the obstacle
 -(Obstacle*)spawn{
    
     int planeType = arc4random() % 2;
@@ -47,10 +50,10 @@
             break;
     }
     
-    
     return newObstacle;
 }
 
+// Despawn the obstacle
 -(void)despawn{
     switch (_oType) {
         case ObstacleTypeSmog:
@@ -62,11 +65,9 @@
         default:
             break;
     }
-}// end despawn
+}
 
-
-
-
+// Move the obstacle
 -(void)moveNode:(SKNode *)node{
     
     switch (_oType) {

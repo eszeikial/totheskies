@@ -12,6 +12,7 @@
 #ifndef ToTheSkies_Helper_h
 #define ToTheSkies_Helper_h
 
+// a struct to represent a point since CGPoint isn't compatible with C
 typedef struct {
     float x, y;
 }cPoint;

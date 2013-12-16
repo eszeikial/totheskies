@@ -5,6 +5,7 @@
 //  Created by Student on 11/15/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+// This class can be used to spawn objects and is the base class for the obstacle spawner and pickup spawner
 
 #import "ObjectSpawner.h"
 
@@ -17,8 +18,7 @@
     double _spawnDelay;
 }
 
-// ------------- Init Method ---------------- //
-
+// Initializer
 - (id)initWithLayer: (SKNode*)layer
    maxItemsOnScreen: (int) maxItems
               delay: (double) spawnDelay {
@@ -37,12 +37,10 @@
     } // end if
     
     return self;
-} // end init
+}
 
 
-
-// ----------- Update layer ------------ //
-
+// Update by spawning new objects if necessary and remove lost objects
 -(void)update {
     _timeSinceLastSpawn = fabs([_timeLastSpawn timeIntervalSinceNow]);
     
@@ -60,20 +58,18 @@
 
 }
 
-// ------------ Spawn ------------------- //
-
+// Spawn an object
 -(SKSpriteNode*)spawn{
     SKSpriteNode *tempSprite = [[SKSpriteNode alloc] init];
     return tempSprite;
 }
 
-// ------------ Despawn ------------- //
+// Despawn an object using a generic name
 -(void)despawn{
     [self despawnWithName:@"genericItem"];
 }
 
-// ------------ Despawn With Name ------------ //
-
+// Despawn an object using its name
 -(void)despawnWithName: (NSString*)nodeName{
     [_gameLayer enumerateChildNodesWithName:nodeName usingBlock: ^(SKNode *node, BOOL *stop) {
         if (node.position.x  < -((SKSpriteNode*)node).size.width || node.position.x > _gameLayer.scene.size.width +((SKSpriteNode*)node).size.width || node.position.y < -((SKSpriteNode*)node).size.height){ // if item offscreen
@@ -88,17 +84,16 @@
 }
 
 
-//-----------Object lost to collision---------//
+// Object lost to collision
 -(void)itemHit
 {
     _itemsOnScreen--;
 }
 
-// --------------- moveNode --------------- //
-
+// Move a specfic node
 -(void)moveNode:(SKNode *)node{
     [node setPosition:CGPointMake(node.position.x, node.position.y - 1)]; //move on-screen items
-} // end move
+}
 
 
 @end

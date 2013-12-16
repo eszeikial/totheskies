@@ -5,11 +5,13 @@
 //  Created by Student on 11/12/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  Represents objects that provide benefits when collided with
 
 #import "Pickup.h"
 #import "GameplayScene.h"
 #import "Helper.h"
 
+// constants for accessing images
 static NSString *const kBlueBalloonImage = @"blueballoon.png";
 static NSString *const kGreenBalloonImage = @"greenballoon.png";
 static NSString *const kOrangeBalloonImage = @"orangeballoon.png";
@@ -17,6 +19,7 @@ static NSString *const kPurpleBalloonImage = @"purpleballoon.png";
 static NSString *const kYellowBalloonImage = @"yellowballoon.png";
 static NSString *const kFuelImage = @"oil.png";
 
+// constants for balloon point values
 static int const kBlueBalloonPoints = 5;
 static int const kGreenBalloonPoints = 10;
 static int const kOrangeBalloonPoints = 15;
@@ -29,9 +32,11 @@ static const float kImageScaleFactor = 0.15;
 static const float kOilScaleFactor = 0.25;
 
 static const int kBalloonPoints = 100;
+static const int kDefaultPoints = 10;
 
 @implementation Pickup
 
+// Initialize the pick up at a certain starting position
 - (id)initWithStartPoint: (CGPoint) point{
     
     PickupType ptype;
@@ -65,9 +70,7 @@ static const int kBalloonPoints = 100;
     return self;
 }
 
-
-
-
+// Initialize the balloon with a random color
 - (id)initBalloonWithColor: (BalloonColor) color{
     
     switch(color)
@@ -117,7 +120,7 @@ static const int kBalloonPoints = 100;
     
 }
 
-
+// Initialize a fuel pickup
 -(id)initFuel{
     self = [super initWithImageNamed:kFuelImage andScaleFactor:kOilScaleFactor];
     self.pType = PickupTypeFuel;
@@ -131,6 +134,7 @@ static const int kBalloonPoints = 100;
     return self;
 }
 
+// Return how many points the pick up is worth when collided with
 -(int)points{
     switch (_pType) {
         
@@ -139,7 +143,7 @@ static const int kBalloonPoints = 100;
             break;
             
         default:
-            return 10;
+            return kDefaultPoints;
             break;
     } // end switch
 }

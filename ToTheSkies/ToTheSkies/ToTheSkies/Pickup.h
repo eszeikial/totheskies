@@ -5,6 +5,7 @@
 //  Created by Student on 11/12/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  Represents objects that provide benefits when collided with
 
 #import <SpriteKit/SpriteKit.h>
 #import "GameObject.h"

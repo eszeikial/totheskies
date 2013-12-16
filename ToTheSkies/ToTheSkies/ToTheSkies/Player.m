@@ -5,6 +5,7 @@
 //  Created by Student on 11/12/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  Represents the player of the game
 
 #import "Player.h"
 #import "Pickup.h"
@@ -19,6 +20,7 @@ static NSString *const kImageFileName = @"character.png";
 
 @implementation Player
 
+// Initialize the player at a certain position ons creen
 - (id)initWithStartPoint: (CGPoint) point{
 
     self = [super initWithImageNamed:kImageFileName andScaleFactor:kImageScaleFactor];
@@ -33,6 +35,7 @@ static NSString *const kImageFileName = @"character.png";
     return self;
 }
 
+// Determine what we collided with and how to react
 - (void)collide: (GameObject*) collisionObject{
  
      switch (collisionObject.physicsBody.categoryBitMask) {
@@ -68,6 +71,7 @@ static NSString *const kImageFileName = @"character.png";
      }
  }
 
+// Set the velocity of the player
 -(void)setVelocityX:(float)x yVector:(float)y
 {
     CGVector vec = CGVectorMake(x,y);

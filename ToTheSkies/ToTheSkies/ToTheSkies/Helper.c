@@ -1,14 +1,13 @@
-//
-
 #include "Helper.h"
-// Return a random number within a range, inclusive
 
-int randInRange(int lowerBound, int upperBound){
+// Return a random number within a range, inclusive
+int randInRange(int lowerBound, int upperBound)
+{
     return rand() % upperBound + lowerBound;
     
 }
 
-// Using general form to calculate distance
+// Use general form to calculate distance
 float calcDistance(cPoint start, cPoint end, cPoint playerPosition, float height)
 {
       /* Getting general form from two points.

@@ -5,6 +5,7 @@
 //  Created by Student on 12/3/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  An object spawner specifically for negative collidables known as obstacles
 
 #import "ObjectSpawner.h"
 #import "Obstacle.h"

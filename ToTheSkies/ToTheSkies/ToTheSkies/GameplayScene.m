@@ -5,6 +5,7 @@
 //  Created by Student on 11/12/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+//  Constrols the scene where the game is running
 
 
 #import <SpriteKit/SpriteKit.h>
@@ -85,7 +86,7 @@
     BOOL _paused;
 }
 
-//Method is called when the scene is presented by a view.
+// Method is called when the scene is presented by a view.
 -(void) didMoveToView:(SKView *)view
 {
     // -------------- layers --------------- //
@@ -192,7 +193,6 @@
 }
 
 // Performs any scene-specific updates that need to occur before scene actions are evaluated.
-// UPDATE 0
 - (void)update:(NSTimeInterval)currentTime
 {
     if(!_paused)
@@ -246,14 +246,16 @@
         _fuelLabel.text = fuelLabelMessage;
         
     }
-} // end update
+}
 
+// Update the score by adding points
 -(void)updateScore: (float) points
 {
     _score += points;
     [self updateScoreLabel];
 }
 
+// Update the score labels if needed
 -(void)updateScoreLabel
 {
     _scoreLabel.text = [[NSString alloc]initWithFormat:@"Score: %i", (int)_score];
@@ -265,7 +267,7 @@
     }
 }
 
-
+// Create text nodes that represent score labels
 -(void)createTextNodes{
 	// player score text node
     _scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Noteworthy"];
@@ -297,9 +299,8 @@
 }
 
 
-//Preforms scene-specific updates after actions are evaluated.
-//This is where we will check collisions that are non-rigidbody collisions
-// UPDATE 1
+// Performs scene-specific updates after actions are evaluated.
+// This is where we will check collisions that are non-rigidbody collisions
 -(void)didEvaluateActions
 {
     //NSLog(@"tramp Pt1 x: %f , y: %f, Player Pos x: %f, y: %f",_startPoint.x,_startPoint.y,_player.position.x, -_player.position.y+_height);
@@ -349,14 +350,13 @@
         _trampolineCollideTimer = 0;
 }
 
-//Performs any scene-specific updates that need to occur after physics simulations are performed.
-// UPDATE 2
+// Performs any scene-specific updates that need to occur after physics simulations are performed.
 -(void)didSimulatePhysics
 {
     [self screenWrap];
 }
 
-//Helper method to wrap screen if necessary.
+// Helper method to wrap screen if necessary.
 -(void)screenWrap
 {
     if(_player.position.x > _width + 20)
@@ -365,7 +365,7 @@
         _player.position = CGPointMake(_width+20, _player.position.y);
 }
 
-//Helper method to segment out trampoline collision code.
+// Helper method to segment out trampoline collision code.
 -(BOOL)checkTrampolineCollision
 {
     //Don't bother checking anything if the trampoline isn't created.
@@ -404,7 +404,7 @@
 }
 
 
-// --------------- General Collision Stuff ------------- //
+// Collision handling
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
 
@@ -431,7 +431,6 @@
 }
 
 // ---------------------TOUCHES------------------------ //
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches){
@@ -480,6 +479,7 @@
     }
 }
 
+// ---------------------TOUCHES------------------------ //
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // iterate through our touch elements
@@ -518,6 +518,7 @@
     }
 }
 
+// ---------------------TOUCHES------------------------ //
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //If both the start and end point were in the drawing box...
@@ -546,11 +547,13 @@
     _touch = nil;
 }
 
+// When the game over alert is dismissed, reset game
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self reset];
 }
 
+// Pause the game
 -(void)pause
 {
     self.view.paused = YES;
@@ -560,6 +563,7 @@
     [defaults synchronize];
 }
 
+// Reset the game by removing objects, resetting player position and score
 -(void)reset
 {
     _score = 0;
@@ -569,17 +573,20 @@
     [self resume];
 }
 
+// Resume a paused game
 -(void)resume
 {
     self.view.paused = NO;
     _paused = NO;
 }
 
+// Add fuel for the player's jetpack
 -(void)addFuel
 {
     _fuel += 25;
 }
 
+// End the game
 -(void)endGame{
     
     [self pause];

@@ -5,6 +5,7 @@
 //  Created by Student on 11/13/13.
 //  Copyright (c) 2013 Student. All rights reserved.
 //
+// This is a base class for all game objects (the player, pickups, obstacles)
 
 #import <SpriteKit/SpriteKit.h>
 
