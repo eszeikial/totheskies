@@ -26,6 +26,8 @@ static NSString* const kPlaneSound = @"planeCrash";
     _volume = 0.0;
     [self playSound: kJumpSound];
     [self playSound: kPopSound];
+    [self playSound: kRocketSound];
+    [self playSound: kPlaneSound];
 }
 
 -(void)setUp
